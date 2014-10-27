@@ -49,6 +49,7 @@
             font-size: 20px;
             color: white;
             font-weight: 100;
+            font-family: "museo-sans";
         }
         
         .secondTitle{
@@ -60,11 +61,24 @@
             left: 50%;
             top: 160px;
             margin-left: -66px;
+            font-family: "museo-sans";
         }
         
         .Holder{
             background-size: contain;
             margin: 150px auto 0 auto;
+        }
+        
+        .deviceButtons{
+            background-image: url("img/deviceButton.png");
+            background-size: cover;
+            height: 47px;
+            width: 47px;
+            position: absolute;
+            top: 0px;
+            left: 50%;
+            margin-left: -23px;
+            transition: all 2s;
         }
         
         .detectAnimation{
@@ -265,12 +279,34 @@
         
         function loadListDevices() {
             setTimeout(function(){
-                console.log(title);
+                var device0 = document.createElement('div');
+                holder.appendChild(device0);
+                
+                holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
+                holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
+                holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
+                holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
+                console.log(holder);
                 title.innerHTML = "Four Devices Found";
                 
                 title.classList.add('fade');
                 title.style.transition = 'all 2s';
                 title.style.top = '130px';
+                
+                device0.classList.add('fade');
+                device0.classList.add('deviceButtons');
+                device0.style.top = '0px';
+                device0.style.top = '-55px';
+                
+                var device1 = document.createElement('div');
+                holder.appendChild(device1);
+                
+                var device2 = document.createElement('div');
+                holder.appendChild(device2);
+                
+                var device3 = document.createElement('div');
+                holder.appendChild(device3);
+                
             }, 3500);
             title.style.marginLeft = '-73px';
         }
