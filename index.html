@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SmartAIR</title>
+    
+    <link href="css/reset.css">
+    <link href="css/bootstrap.min.css">
+    
+    <script src="js/jquery-1.11.1.min.js"></script>
+    
+    <!--<script src="//use.typekit.net/tjr2acx.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>-->
+    
+    <style>
+        
+        html{
+            height: 100%;
+        }
+        
+        body{
+            height: 100%;
+            position: relative;
+        }
+        .container{
+        }
+        
+        .col-md-12{
+            //background-color: red;
+            margin:  0 auto;
+            width: 360px;
+            height: 640px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -320px;
+            margin-left: -180px;
+            background-image: url("img/bg.png");
+        }
+        
+        .statusBar{
+            background-image: url("img/status.png");
+            width: 360px;
+            height: 38px;
+        }
+        
+        .title{
+            text-align: center;
+            font-size: 20px;
+            color: white;
+            font-weight: 100;
+        }
+        
+        .secondTitle{
+            text-align: center;
+            font-size: 18px;
+            color: white;
+            font-weight: 500;
+            position: absolute;
+            left: 50%;
+            top: 160px;
+            margin-left: -66px;
+        }
+        
+        .Holder{
+            background-size: contain;
+            margin: 150px auto 0 auto;
+        }
+        
+        .detectAnimation{
+            -webkit-animation: detectClick 0.3s linear;
+        }
+        
+        .loadingAnimation{
+            -webkit-animation: loadingClick 1.8s linear;
+        }
+        
+        .fade{
+            -webkit-animation: fade 0.8s ease;
+        }
+        
+        
+        /*  --- KeyFrames --- */
+        
+        @-webkit-keyframes detectClick{
+            
+            0% {
+                height: 197px;
+                width: 198px;
+                margin-top: 150px;
+            }
+            
+            65%{
+                height: 185px;
+                width: 186px;
+                margin-top: 160px;
+            }
+            
+            100% {
+                height: 197px;
+                width: 198px;
+                margin-top: 150px;
+            }
+            
+        }
+        
+        @-webkit-keyframes loadingClick{
+            
+            0% {
+                height: 45px;
+                width: 45px;
+                border-radius: 100%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-left: -22px;
+                margin-top: -22px;
+                background-color: #fefefe;
+                opacity: 0.9;
+            }
+            
+            25%{
+                
+                height: 100px;
+                width: 100px;
+                border-radius: 100%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-left: -50px;
+                margin-top: -50px;
+                background-color: #fefefe;
+                opacity: 0.7;
+                
+            }
+            
+            100% {
+                height: 198px;
+                width: 198px;
+                border-radius: 100%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-left: -99px;
+                margin-top: -99px;
+                background-color: #81b0bd;
+                opacity: 0.5;
+            }
+        }
+        
+        @-webkit-keyframes fade{
+            0%{
+                opacity: 0;
+            }
+            
+            100%{
+                opacity: 1;
+            }
+        }
+    </style>
+
+</head>
+
+<body style="margin: 0px;">
+        
+        <div class="col-md-12">
+            
+            <div class="statusBar"></div>
+            
+            <div class="content">
+                
+                <p class="title tk-museo-sans">smartAIR</p>
+                
+                <div class="Holder"></div>
+                
+            </div>
+            
+        </div>
+        
+
+</body>
+
+<script>
+        
+        var holder = document.getElementsByClassName("Holder")[0];
+        var title = document.createElement('p');
+        window.onload = loadDetect;
+        //var newdetect = detect.cloneNode(true);
+        //alert(detect);
+        
+        //Load each section
+        
+        function loadDetect() {
+            holder.style.backgroundImage="url('img/detect.png')";
+            holder.style.width="198px";
+            holder.style.height="197px";
+            
+            holder.addEventListener("mousedown", detectButtonClick);
+        }
+        
+        function loadingLoad(){
+            document.getElementsByClassName('content')[0].insertBefore(title, holder);
+            title.innerHTML = "Detecting Devices";
+            title.classList.add("secondTitle");
+            title.classList.add("fade");
+            
+            //console.log(title);
+            
+            holder.removeEventListener("mousedown", detectButtonClick);
+            holder.style.backgroundImage='url("img/detectRing.png")';
+            holder.style.opacity='0.5';
+            
+            var loader0 = document.createElement('div');
+            holder.appendChild(loader0);
+            
+            var loader1 = document.createElement('div');
+            holder.appendChild(loader1);
+            
+            var loader2 = document.createElement('div');
+            holder.appendChild(loader2);
+            
+            var loader3 = document.createElement('div');
+            holder.appendChild(loader3);
+            
+            holder.style.position='relative';
+            loader0.style.position='absolute';
+            loader1.style.position='absolute';
+            loader2.style.position='absolute';
+            loader3.style.position='absolute';
+            
+            pulse();
+            
+            function pulse() {
+                
+                setTimeout(function(){
+                    
+                        console.log(loader0);
+                        loader0.classList.add("loadingAnimation");
+                }, 200);
+                
+                setTimeout(function(){
+                    
+                        console.log(loader1);
+                        loader1.classList.add("loadingAnimation");
+                }, 700);
+                
+                setTimeout(function(){
+                    
+                        console.log(loader2);
+                        loader2.classList.add("loadingAnimation");
+                }, 1100);
+                
+                setTimeout(function(){
+                    
+                        console.log(loader3);
+                        loader3.classList.add("loadingAnimation");
+                        title.classList.remove('fade');
+                }, 1500);
+                
+            }
+            
+            loadListDevices();
+            
+        }
+        
+        function loadListDevices() {
+            setTimeout(function(){
+                console.log(title);
+                title.innerHTML = "Four Devices Found";
+                
+                title.classList.add('fade');
+                title.style.transition = 'all 2s';
+                title.style.top = '130px';
+            }, 3500);
+            title.style.marginLeft = '-73px';
+        }
+        
+        //Click events
+        
+        function detectButtonClick()
+        {
+            
+            holder.classList.add("detectAnimation");
+            
+            setTimeout(function pause() {
+                holder.classList.remove("detectAnimation");
+                //holder.classList.add("fadeAnimation");
+                loadingLoad();
+                    
+            },600);
+            
+        }
+        
+    </script>
+
+</html>
