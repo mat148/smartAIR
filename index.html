@@ -75,10 +75,9 @@
             height: 47px;
             width: 47px;
             position: absolute;
-            top: 0px;
-            left: 50%;
-            margin-left: -23px;
-            transition: all 2s;
+            top: 0;
+            left: 0;
+            /*transition: all 1.5s ease-out;*/
         }
         
         .detectAnimation{
@@ -91,6 +90,10 @@
         
         .fade{
             -webkit-animation: fade 0.8s ease;
+        }
+        
+        .deviceButtonAnimate{
+            -webkit-animation: deviceButtonClick 0.3s linear;
         }
         
         
@@ -162,6 +165,32 @@
             }
         }
         
+        @-webkit-keyframes deviceButtonClick{
+            0%{
+                width: 47px;
+                height: 47px;
+                //margin-left: -23px;
+                //margin-top: -23px;
+                top: 40px;
+            }
+            
+            65%{
+                width: 35px;
+                height: 35px;
+                //margin-left: -17px;
+                //margin-top: -17px;
+                //top: -10px;
+            }
+            
+            100%{
+                width: 47px;
+                height: 47px;
+                //margin-left: -23px;
+                //margin-top: -23px;
+                //top: -55px;
+            }
+        }
+        
         @-webkit-keyframes fade{
             0%{
                 opacity: 0;
@@ -198,6 +227,10 @@
         
         var holder = document.getElementsByClassName("Holder")[0];
         var title = document.createElement('p');
+        var device0;
+        var device1;
+        var device2;
+        var device3;
         window.onload = loadDetect;
         //var newdetect = detect.cloneNode(true);
         //alert(detect);
@@ -222,7 +255,6 @@
             
             holder.removeEventListener("mousedown", detectButtonClick);
             holder.style.backgroundImage='url("img/detectRing.png")';
-            holder.style.opacity='0.5';
             
             var loader0 = document.createElement('div');
             holder.appendChild(loader0);
@@ -279,8 +311,6 @@
         
         function loadListDevices() {
             setTimeout(function(){
-                var device0 = document.createElement('div');
-                holder.appendChild(device0);
                 
                 holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
                 holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
@@ -293,22 +323,61 @@
                 title.style.transition = 'all 2s';
                 title.style.top = '130px';
                 
+                device0.style.visibility = 'visible';
                 device0.classList.add('fade');
-                device0.classList.add('deviceButtons');
-                device0.style.top = '0px';
                 device0.style.top = '-55px';
+                device0.classList.remove('fade');
                 
-                var device1 = document.createElement('div');
-                holder.appendChild(device1);
+                device1.style.visibility = 'visible';
+                device1.classList.add('fade');
+                device1.style.marginLeft="210px";
                 
-                var device2 = document.createElement('div');
-                holder.appendChild(device2);
+                device2.style.visibility = 'visible';
+                device2.classList.add('fade');
+                device2.style.marginLeft="-60px";
                 
-                var device3 = document.createElement('div');
-                holder.appendChild(device3);
+                device3.style.visibility = 'visible';
+                device3.classList.add('fade');
+                device3.style.top = '210px';
                 
             }, 3500);
             title.style.marginLeft = '-73px';
+            
+            device0 = document.createElement('div');
+            holder.appendChild(device0);
+            device0.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">1</p>';
+            device0.classList.add('deviceButtons');
+            device0.style.visibility = 'hidden';
+            device0.style.left = '50%';
+            device0.style.marginLeft = '-23px';
+            
+            device0.onclick = device0OnClick;
+            
+            device1 = document.createElement('div');
+            holder.appendChild(device1);
+            device1.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">2</p>';
+            device1.classList.add('deviceButtons');
+            device1.style.visibility = 'hidden';
+            device1.style.top = '50%';
+            device1.style.marginTop="-23px";
+            device1.style.marginLeft="150px";
+                
+            device2 = document.createElement('div');
+            holder.appendChild(device2);
+            device2.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">4</p>';
+            device2.classList.add('deviceButtons');
+            device2.style.visibility = 'hidden';
+            device2.style.top = '50%';
+            device2.style.marginTop="-23px";
+                
+            device3 = document.createElement('div');
+            holder.appendChild(device3);
+            device3.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">3</p>';
+            device3.classList.add('deviceButtons');
+            device3.style.visibility = 'hidden';
+            device3.style.left = '50%';
+            device3.style.marginLeft = '-23px';
+            device3.style.top = '150px';
         }
         
         //Click events
@@ -325,6 +394,24 @@
                     
             },600);
             
+        }
+        
+        function device0OnClick()
+        {
+            //device0.classList.add("deviceButtonAnimate");
+            device0.style.width = "35px";
+            device0.style.height = "35px";
+            device0.style.top = "35px";
+            device0.style.left = "35px";
+            
+            
+            setTimeout(function pause(){
+                //device0.classList.remove("deviceButtonAnimate");
+                device0.style.width = "47px";
+                device0.style.height = "47px";
+                device0.style.top = undefined;
+                device0.style.left = "50%";
+            },600);
         }
         
     </script>
