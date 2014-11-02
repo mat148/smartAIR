@@ -75,9 +75,19 @@
             height: 47px;
             width: 47px;
             position: absolute;
-            top: 0;
-            left: 0;
-            /*transition: all 1.5s ease-out;*/
+            top: 77px;
+            left: 77px;
+            transition: all 1.0s ease-out;
+        }
+        
+        .floorButtons{
+            background-image: url("img/floorButtonSmall.png");
+            background-size: cover;
+            height: 32px;
+            width: 32px;
+            transform: rotate(0deg) translateX(0px)";
+            position: absolute;
+            transition: all 1.0s ease-out;
         }
         
         .detectAnimation{
@@ -89,7 +99,7 @@
         }
         
         .fade{
-            -webkit-animation: fade 0.8s ease;
+            -webkit-animation: fade 1.5s ease;
         }
         
         .deviceButtonAnimate{
@@ -171,7 +181,7 @@
                 height: 47px;
                 //margin-left: -23px;
                 //margin-top: -23px;
-                top: 40px;
+                //top: 40px;
             }
             
             65%{
@@ -231,6 +241,8 @@
         var device1;
         var device2;
         var device3;
+        var deviceButton = [];
+        
         window.onload = loadDetect;
         //var newdetect = detect.cloneNode(true);
         //alert(detect);
@@ -326,19 +338,18 @@
                 device0.style.visibility = 'visible';
                 device0.classList.add('fade');
                 device0.style.top = '-55px';
-                device0.classList.remove('fade');
                 
                 device1.style.visibility = 'visible';
                 device1.classList.add('fade');
-                device1.style.marginLeft="210px";
+                device1.style.left = '208px';
                 
                 device2.style.visibility = 'visible';
                 device2.classList.add('fade');
-                device2.style.marginLeft="-60px";
+                device2.style.top = '207px';
                 
                 device3.style.visibility = 'visible';
                 device3.classList.add('fade');
-                device3.style.top = '210px';
+                device3.style.left = '-57px';
                 
             }, 3500);
             title.style.marginLeft = '-73px';
@@ -348,8 +359,6 @@
             device0.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">1</p>';
             device0.classList.add('deviceButtons');
             device0.style.visibility = 'hidden';
-            device0.style.left = '50%';
-            device0.style.marginLeft = '-23px';
             
             device0.onclick = device0OnClick;
             
@@ -358,26 +367,112 @@
             device1.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">2</p>';
             device1.classList.add('deviceButtons');
             device1.style.visibility = 'hidden';
-            device1.style.top = '50%';
-            device1.style.marginTop="-23px";
-            device1.style.marginLeft="150px";
+            
+            device1.onclick = device1OnClick;
                 
             device2 = document.createElement('div');
             holder.appendChild(device2);
-            device2.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">4</p>';
+            device2.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">3</p>';
             device2.classList.add('deviceButtons');
             device2.style.visibility = 'hidden';
-            device2.style.top = '50%';
-            device2.style.marginTop="-23px";
+            
+            device2.onclick = device2OnClick;
                 
             device3 = document.createElement('div');
             holder.appendChild(device3);
-            device3.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">3</p>';
+            device3.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">4</p>';
             device3.classList.add('deviceButtons');
             device3.style.visibility = 'hidden';
-            device3.style.left = '50%';
-            device3.style.marginLeft = '-23px';
-            device3.style.top = '150px';
+            
+            device3.onclick = device3OnClick;
+        }
+        
+        function openDevicesOptions(clicked){
+                
+                //create buttons and add them to the array
+                
+                var basement = document.createElement('div');
+                basement.classList.add('floorButtons');
+                deviceButton.push(basement);
+                deviceButton[0].style.transform = "rotate(0deg) translateX(0px)";
+                
+                var floor1 = document.createElement('div');
+                floor1.classList.add('floorButtons');
+                deviceButton.push(floor1);
+                
+                var floor2 = document.createElement('div');
+                floor2.classList.add('floorButtons');
+                deviceButton.push(floor2);
+                
+                var floor3 = document.createElement('div');
+                floor3.classList.add('floorButtons');
+                deviceButton.push(floor3);
+                
+                var floor4 = document.createElement('div');
+                floor4.classList.add('floorButtons');
+                deviceButton.push(floor4);
+                
+                var attic = document.createElement('div');
+                attic.classList.add('floorButtons');
+                deviceButton.push(attic);
+                
+                
+                if (clicked == device0) {
+                    
+                    //deviceButton.style.top = "50px";
+                    //deviceButton.style.left = "50px";
+                    
+                    for(i=0; i < deviceButton.length;)
+                    {
+                        
+                        deviceButton[i].style.top = '-47px';
+                        deviceButton[i].style.left = '84px';
+                        deviceButton[i].style.transform = "rotate(33deg) translateX(80px)";
+                        //deviceButton[i].style.zIndex = '-1';
+                        
+                        i++;
+                        
+                    }
+                    
+                    rotateAndPosition();
+                    
+                    
+                }
+                
+                
+                
+                function rotateAndPosition() {
+                    
+                    holder.appendChild(basement);
+                
+                    holder.appendChild(floor1);
+                
+                    holder.appendChild(floor2);
+                
+                    holder.appendChild(floor3);
+                
+                    holder.appendChild(floor4);
+                
+                    holder.appendChild(attic);
+                    
+                    //Do some Math shit
+                
+                    var moveAroundBy = 0;
+                    var moveAroundByNeg = '-'+(moveAroundBy);
+                    var deg = 'deg';
+                    
+                    for (i=0; i < deviceButton.length;) {
+                            
+                            //deviceButton[i].style.transform = "rotate("+moveAroundBy+deg+") translateX(80px) rotate("+moveAroundByNeg+deg+")";
+                            
+                            deviceButton[i].classList.add('rotateAndMove');
+                            i++;
+                            moveAroundBy += (180/(deviceButton.length - 1));
+                            moveAroundByNeg = '-'+(moveAroundBy);
+                        
+                    }
+                }
+            
         }
         
         //Click events
@@ -398,20 +493,67 @@
         
         function device0OnClick()
         {
-            //device0.classList.add("deviceButtonAnimate");
-            device0.style.width = "35px";
-            device0.style.height = "35px";
-            device0.style.top = "35px";
-            device0.style.left = "35px";
-            
+            device0.style.width = "30px";
+            device0.style.height = "30px";
+            device0.style.top = "-47px";
+            device0.style.left = '85px';
             
             setTimeout(function pause(){
-                //device0.classList.remove("deviceButtonAnimate");
                 device0.style.width = "47px";
                 device0.style.height = "47px";
-                device0.style.top = undefined;
-                device0.style.left = "50%";
-            },600);
+                device0.style.top = "-55px";
+                device0.style.left = '77px';
+                openDevicesOptions(device0);
+            },500);
+        }
+        
+        
+        function device1OnClick()
+        {
+            device1.style.width = "30px";
+            device1.style.height = "30px";
+            device1.style.top = "86px";
+            device1.style.left = '216px';
+            
+            setTimeout(function pause(){
+                device1.style.width = "47px";
+                device1.style.height = "47px";
+                device1.style.top = "77px";
+                device1.style.left = '208px';
+                openDevicesOptions();
+            },500);
+        }
+        
+        function device2OnClick()
+        {
+            device2.style.width = "30px";
+            device2.style.height = "30px";
+            device2.style.top = "218px";
+            device2.style.left = '84px';
+            
+            setTimeout(function pause(){
+                device2.style.width = "47px";
+                device2.style.height = "47px";
+                device2.style.top = "207px";
+                device2.style.left = '77px';
+                openDevicesOptions();
+            },500);
+        }
+        
+        function device3OnClick()
+        {
+            device3.style.width = "30px";
+            device3.style.height = "30px";
+            device3.style.top = "86px";
+            device3.style.left = '-50px';
+            
+            setTimeout(function pause(){
+                device3.style.width = "47px";
+                device3.style.height = "47px";
+                device3.style.top = "77px";
+                device3.style.left = '-57px';
+                openDevicesOptions();
+            },500);
         }
         
     </script>
