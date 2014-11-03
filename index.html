@@ -672,21 +672,30 @@
                         for(x=0; x < deviceButton.length;)
                         {
                             
+                            //deviceButton[x].style.top = '8px';
+                            //deviceButton[x].style.left = '58px';
+                            
                             deviceButton[x].style.top = '-47px';
                             deviceButton[x].style.left = '84px';
                             deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
-                            //deviceButton[i].style.zIndex = '-1';
+                            deviceButton[x].classList.add = ('fade');
                             
                             x++;
                             
                         }
+                        
+                        window.setTimeout(function() {
+                            
+                            rotateAndPosition();
+                            
+                        }, 900);
                         
                         
                         //alert('yo');
                         deviceClicked = 'device0';
                     
                         moveAroundBy = 180;
-                        rotateAndPosition();
+                        //rotateAndPosition();
                     }
                     
                     if(deviceClicked == 'device0' || deviceClicked == 'empty')
@@ -799,6 +808,14 @@
                                 moveAroundByNeg = -1*(moveAroundBy); 
                             }
                     }
+                    
+                    
+                    window.setTimeout(function(){
+                           
+                             
+                                
+                    }, 300)
+                    
                 }
         
         //Click events
