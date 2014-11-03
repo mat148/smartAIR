@@ -26,7 +26,6 @@
         }
         
         .col-md-12{
-            //background-color: red;
             margin:  0 auto;
             width: 360px;
             height: 640px;
@@ -242,6 +241,9 @@
         var device2;
         var device3;
         var deviceButton = [];
+        var deviceClicked = 'empty';
+        
+        var moveAroundBy = 0;
         
         window.onload = loadDetect;
         //var newdetect = detect.cloneNode(true);
@@ -389,91 +391,415 @@
         
         function openDevicesOptions(clicked){
                 
-                //create buttons and add them to the array
+                var basement;
                 
-                var basement = document.createElement('div');
-                basement.classList.add('floorButtons');
-                deviceButton.push(basement);
-                deviceButton[0].style.transform = "rotate(0deg) translateX(0px)";
+                var floor1;
                 
-                var floor1 = document.createElement('div');
-                floor1.classList.add('floorButtons');
-                deviceButton.push(floor1);
+                var floor2;
                 
-                var floor2 = document.createElement('div');
-                floor2.classList.add('floorButtons');
-                deviceButton.push(floor2);
+                var floor3;
                 
-                var floor3 = document.createElement('div');
-                floor3.classList.add('floorButtons');
-                deviceButton.push(floor3);
+                var floor4;
                 
-                var floor4 = document.createElement('div');
-                floor4.classList.add('floorButtons');
-                deviceButton.push(floor4);
+                var attic;
                 
-                var attic = document.createElement('div');
-                attic.classList.add('floorButtons');
-                deviceButton.push(attic);
+                if (clicked == device1) {
+                    
+                    if (deviceClicked == 'device0' || 'device2' || 'device3') {
+                        for(x=0; x < deviceButton.length;)
+                        {
+                            
+                            deviceButton[x].style.top = '85px';
+                            deviceButton[x].style.left = '216px';
+                            deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                            //deviceButton[i].style.zIndex = '-1';
+                            
+                            x++;
+                            
+                        }
+                        
+                        
+                        //alert('yo');
+                        deviceClicked = 'device1';
+                    
+                        moveAroundBy = 180;
+                        rotateAndPosition();
+                    }
+                    
+                    if (deviceClicked == 'device1' || deviceClicked == 'empty') {
+                        
+                        if (deviceButton.length > 0) {
+                            //alert('do nothing bitch');
+                        }
+                        
+                        else
+                        {
+                            basement = document.createElement('div');
+                            basement.classList.add('floorButtons');
+                            deviceButton.push(basement);
+                            //deviceButton[0].style.transform = "rotate(0deg) translateX(0px)";
+                            
+                            floor1 = document.createElement('div');
+                            floor1.classList.add('floorButtons');
+                            deviceButton.push(floor1);
+                            
+                            floor2 = document.createElement('div');
+                            floor2.classList.add('floorButtons');
+                            deviceButton.push(floor2);
+                            
+                            floor3 = document.createElement('div');
+                            floor3.classList.add('floorButtons');
+                            deviceButton.push(floor3);
+                            
+                            floor4 = document.createElement('div');
+                            floor4.classList.add('floorButtons');
+                            deviceButton.push(floor4);
+                            
+                            attic = document.createElement('div');
+                            attic.classList.add('floorButtons');
+                            deviceButton.push(attic);
+                            
+                            holder.appendChild(basement);
+                    
+                            holder.appendChild(floor1);
+                        
+                            holder.appendChild(floor2);
+                        
+                            holder.appendChild(floor3);
+                        
+                            holder.appendChild(floor4);
+                        
+                            holder.appendChild(attic);
+                            
+                            for(x=0; x < deviceButton.length;)
+                            {
+                                
+                                deviceButton[x].style.top = '85px';
+                                deviceButton[x].style.left = '216px';
+                                deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                                //deviceButton[i].style.zIndex = '-1';
+                                
+                                x++;
+                                
+                            }
+                            
+                            deviceClicked = 'device1';
+                        
+                            moveAroundBy = 180;
+                            rotateAndPosition();
+                        }
+                    }
+                    
+                }
                 
+                if (clicked == device2) {
+                    
+                    if (deviceClicked == 'device0' || 'device1' || 'device3') {
+                        for(x=0; x < deviceButton.length;)
+                        {
+                            
+                            deviceButton[x].style.top = '215px';
+                            deviceButton[x].style.left = '84px';
+                            deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                            //deviceButton[i].style.zIndex = '-1';
+                            
+                            x++;
+                            
+                        }
+                        
+                        
+                        //alert('yo');
+                        deviceClicked = 'device2';
+                    
+                        moveAroundBy = 90;
+                        rotateAndPosition();
+                    }
+                    
+                    if (deviceClicked == 'device2' || deviceClicked == 'empty') {
+                        
+                        if (deviceButton.length > 0) {
+                            //alert('do nothing bitch');
+                        }
+                        
+                        else
+                        {
+                            basement = document.createElement('div');
+                            basement.classList.add('floorButtons');
+                            deviceButton.push(basement);
+                            
+                            floor1 = document.createElement('div');
+                            floor1.classList.add('floorButtons');
+                            deviceButton.push(floor1);
+                            
+                            floor2 = document.createElement('div');
+                            floor2.classList.add('floorButtons');
+                            deviceButton.push(floor2);
+                            
+                            floor3 = document.createElement('div');
+                            floor3.classList.add('floorButtons');
+                            deviceButton.push(floor3);
+                            
+                            floor4 = document.createElement('div');
+                            floor4.classList.add('floorButtons');
+                            deviceButton.push(floor4);
+                            
+                            attic = document.createElement('div');
+                            attic.classList.add('floorButtons');
+                            deviceButton.push(attic);
+                            
+                            holder.appendChild(basement);
+                    
+                            holder.appendChild(floor1);
+                        
+                            holder.appendChild(floor2);
+                        
+                            holder.appendChild(floor3);
+                        
+                            holder.appendChild(floor4);
+                        
+                            holder.appendChild(attic);
+                            
+                            for(x=0; x < deviceButton.length;)
+                            {
+                                
+                                deviceButton[x].style.top = '215px';
+                                deviceButton[x].style.left = '84px';
+                                deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                                //deviceButton[i].style.zIndex = '-1';
+                                
+                                x++;
+                                
+                            }
+                            deviceClicked = 'device2';
+                            moveAroundBy = 90;
+                            rotateAndPosition();
+                        }
+                        
+                    }
+                
+                }
+                
+                if (clicked == device3) {
+                    
+                    if (deviceClicked == 'device0' || 'device1' || 'device2') {
+                        for(x=0; x < deviceButton.length;)
+                        {
+                            
+                            deviceButton[x].style.top = '85px';
+                            deviceButton[x].style.left = '-50px';
+                            deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                            //deviceButton[i].style.zIndex = '-1';
+                            
+                            x++;
+                            
+                        }
+                        
+                        
+                        //alert('yo');
+                        deviceClicked = 'device3';
+                    
+                        moveAroundBy = -180;
+                        rotateAndPosition();
+                    }
+                    
+                    if(deviceClicked == 'device3' || deviceClicked == 'empty')
+                    { 
+                        if (deviceButton.length > 0) {
+                            //alert('do nothing bitch');
+                        }
+                        
+                        else
+                        {
+                            basement = document.createElement('div');
+                            basement.classList.add('floorButtons');
+                            deviceButton.push(basement);
+                            
+                            floor1 = document.createElement('div');
+                            floor1.classList.add('floorButtons');
+                            deviceButton.push(floor1);
+                            
+                            floor2 = document.createElement('div');
+                            floor2.classList.add('floorButtons');
+                            deviceButton.push(floor2);
+                            
+                            floor3 = document.createElement('div');
+                            floor3.classList.add('floorButtons');
+                            deviceButton.push(floor3);
+                            
+                            floor4 = document.createElement('div');
+                            floor4.classList.add('floorButtons');
+                            deviceButton.push(floor4);
+                            
+                            attic = document.createElement('div');
+                            attic.classList.add('floorButtons');
+                            deviceButton.push(attic);
+                            
+                            holder.appendChild(basement);
+                    
+                            holder.appendChild(floor1);
+                        
+                            holder.appendChild(floor2);
+                        
+                            holder.appendChild(floor3);
+                        
+                            holder.appendChild(floor4);
+                        
+                            holder.appendChild(attic);
+                            
+                            for(x=0; x < deviceButton.length;)
+                            {
+                                
+                                deviceButton[x].style.top = '85px';
+                                deviceButton[x].style.left = '-50px';
+                                //deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                                //deviceButton[i].style.zIndex = '-1';
+                                
+                                x++;
+                                
+                            }
+                            deviceClicked = 'device3';
+                            moveAroundBy = -180;
+                            rotateAndPosition();
+                        }
+                    }
+                }
                 
                 if (clicked == device0) {
                     
-                    //deviceButton.style.top = "50px";
-                    //deviceButton.style.left = "50px";
+                    console.log(deviceClicked);
                     
-                    for(i=0; i < deviceButton.length;)
-                    {
+                    if (deviceClicked == 'device1' || 'device2' || 'device3') {
+                        for(x=0; x < deviceButton.length;)
+                        {
+                            
+                            deviceButton[x].style.top = '-47px';
+                            deviceButton[x].style.left = '84px';
+                            deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                            //deviceButton[i].style.zIndex = '-1';
+                            
+                            x++;
+                            
+                        }
                         
-                        deviceButton[i].style.top = '-47px';
-                        deviceButton[i].style.left = '84px';
-                        deviceButton[i].style.transform = "rotate(33deg) translateX(80px)";
-                        //deviceButton[i].style.zIndex = '-1';
                         
-                        i++;
-                        
+                        //alert('yo');
+                        deviceClicked = 'device0';
+                    
+                        moveAroundBy = 180;
+                        rotateAndPosition();
                     }
                     
-                    rotateAndPosition();
+                    if(deviceClicked == 'device0' || deviceClicked == 'empty')
+                    {
+                        
+                        if (deviceButton.length > 0) {
+                            //alert('do nothing bitch');
+                        }
+                        
+                        else
+                        {  
+                            basement = document.createElement('div');
+                            basement.classList.add('floorButtons');
+                            deviceButton.push(basement);
+                            
+                            floor1 = document.createElement('div');
+                            floor1.classList.add('floorButtons');
+                            deviceButton.push(floor1);
+                            
+                            floor2 = document.createElement('div');
+                            floor2.classList.add('floorButtons');
+                            deviceButton.push(floor2);
+                            
+                            floor3 = document.createElement('div');
+                            floor3.classList.add('floorButtons');
+                            deviceButton.push(floor3);
+                            
+                            floor4 = document.createElement('div');
+                            floor4.classList.add('floorButtons');
+                            deviceButton.push(floor4);
+                            
+                            attic = document.createElement('div');
+                            attic.classList.add('floorButtons');
+                            deviceButton.push(attic);
+                            
+                            holder.appendChild(basement);
                     
+                            holder.appendChild(floor1);
+                        
+                            holder.appendChild(floor2);
+                        
+                            holder.appendChild(floor3);
+                        
+                            holder.appendChild(floor4);
+                        
+                            holder.appendChild(attic);
+                            
+                            for(x=0; x < deviceButton.length;)
+                            {
+                                
+                                deviceButton[x].style.top = '-47px';
+                                deviceButton[x].style.left = '84px';
+                                //deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                                //deviceButton[i].style.zIndex = '-1';
+                                
+                                x++;
+                                
+                            }
+                            deviceClicked = 'device0';
+                            moveAroundBy = -180;
+                            rotateAndPosition();
+                            
+                        }
+                    }
                     
                 }
+                
+        }
                 
                 
                 
                 function rotateAndPosition() {
                     
-                    holder.appendChild(basement);
-                
-                    holder.appendChild(floor1);
-                
-                    holder.appendChild(floor2);
-                
-                    holder.appendChild(floor3);
-                
-                    holder.appendChild(floor4);
-                
-                    holder.appendChild(attic);
-                    
-                    //Do some Math shit
-                
-                    var moveAroundBy = 0;
-                    var moveAroundByNeg = '-'+(moveAroundBy);
+                    var moveAroundByNeg = -1*(moveAroundBy);
                     var deg = 'deg';
                     
                     for (i=0; i < deviceButton.length;) {
                             
-                            //deviceButton[i].style.transform = "rotate("+moveAroundBy+deg+") translateX(80px) rotate("+moveAroundByNeg+deg+")";
+                            deviceButton[i].classList.add('fade');
                             
-                            deviceButton[i].classList.add('rotateAndMove');
-                            i++;
-                            moveAroundBy += (180/(deviceButton.length - 1));
-                            moveAroundByNeg = '-'+(moveAroundBy);
-                        
+                            console.log(deviceClicked);
+                            
+                            if (deviceClicked == 'device0') {
+                                deviceButton[i].style.transform = "rotate("+moveAroundBy+deg+") translateX(80px) rotate("+moveAroundByNeg+deg+")";
+                                console.log(moveAroundBy+deg);
+
+                                i++;
+                                moveAroundBy -= (180/(deviceButton.length - 1));
+                                moveAroundByNeg = -1*(moveAroundBy);
+                            }
+                            if (deviceClicked == 'device1') {
+                                deviceButton[i].style.transform = "rotate("+moveAroundBy+deg+") translateY(80px) rotate("+moveAroundByNeg+deg+")";
+                                
+                                i++;
+                                moveAroundBy -= (180/(deviceButton.length - 1));
+                                moveAroundByNeg = -1*(moveAroundBy);
+                            }
+                            if (deviceClicked == 'device2') {
+                                deviceButton[i].style.transform = "rotate("+moveAroundBy+deg+") translateY(80px) rotate("+moveAroundByNeg+deg+")";
+                                
+                                i++;
+                                moveAroundBy += (180/(deviceButton.length - 1));
+                                moveAroundByNeg = -1*(moveAroundBy);
+                            }
+                            if (deviceClicked == 'device3') {
+                                deviceButton[i].style.transform = "rotate("+moveAroundBy+deg+") translateY(80px) rotate("+moveAroundByNeg+deg+")";
+                                
+                                i++;
+                                moveAroundBy += (180/(deviceButton.length - 1));
+                                moveAroundByNeg = -1*(moveAroundBy); 
+                            }
                     }
                 }
-            
-        }
         
         //Click events
         
@@ -503,6 +829,7 @@
                 device0.style.height = "47px";
                 device0.style.top = "-55px";
                 device0.style.left = '77px';
+                //deviceClicked = 'device0';
                 openDevicesOptions(device0);
             },500);
         }
@@ -520,7 +847,8 @@
                 device1.style.height = "47px";
                 device1.style.top = "77px";
                 device1.style.left = '208px';
-                openDevicesOptions();
+                //deviceClicked = 'device1';
+                openDevicesOptions(device1);
             },500);
         }
         
@@ -536,7 +864,8 @@
                 device2.style.height = "47px";
                 device2.style.top = "207px";
                 device2.style.left = '77px';
-                openDevicesOptions();
+                //deviceClicked = 'device2';
+                openDevicesOptions(device2);
             },500);
         }
         
@@ -552,7 +881,8 @@
                 device3.style.height = "47px";
                 device3.style.top = "77px";
                 device3.style.left = '-57px';
-                openDevicesOptions();
+                //deviceClicked = 'device3';
+                openDevicesOptions(device3);
             },500);
         }
         
