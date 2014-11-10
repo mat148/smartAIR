@@ -402,6 +402,14 @@
             device3.onclick = device3OnClick;
         }
         
+        function loadMainHub() {
+            var aqiTitle = document.createElement('p');
+            aqiTitle.innerHTML('<span id="aqiNum">30</span>/100');
+            
+            holder.appendChild(aqiTitle);
+            
+        }
+        
         function openDevicesOptions(clicked){
                 
                 if (clicked == device1) {
@@ -876,6 +884,8 @@
             attic.style.backgroundImage ='url("img/floorButtonSmallGreen.png")';
             attic.firstChild.style.left='22px';
             attic.firstChild.style.top='-12px';
+            
+            loadMainHub();
         }
         
         function basementClick(floor)
