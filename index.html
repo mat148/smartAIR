@@ -9,8 +9,8 @@
     
     <script src="js/jquery-1.11.1.min.js"></script>
     
-    <!--<script src="//use.typekit.net/tjr2acx.js"></script>
-    <script>try{Typekit.load();}catch(e){}</script>-->
+    <script src="//use.typekit.net/tjr2acx.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
     
     <style>
         
@@ -241,6 +241,19 @@
         var device2;
         var device3;
         var deviceButton = [];
+        
+        var device0Array = [];
+        var device1Array = [];
+        var device2Array = [];
+        var device3Array = [];
+    
+        var basement;
+        var floor1;
+        var floor2;
+        var floor3;
+        var floor4;
+        var attic;
+    
         var deviceClicked = 'empty';
         
         var moveAroundBy = 0;
@@ -330,7 +343,7 @@
                 holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
                 holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
                 holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
-                console.log(holder);
+                //console.log(holder);
                 title.innerHTML = "Four Devices Found";
                 
                 title.classList.add('fade');
@@ -391,18 +404,6 @@
         
         function openDevicesOptions(clicked){
                 
-                var basement;
-                
-                var floor1;
-                
-                var floor2;
-                
-                var floor3;
-                
-                var floor4;
-                
-                var attic;
-                
                 if (clicked == device1) {
                     
                     if (deviceClicked == 'device0' || 'device2' || 'device3') {
@@ -428,48 +429,13 @@
                     
                     if (deviceClicked == 'device1' || deviceClicked == 'empty') {
                         
-                        if (deviceButton.length > 0) {
+                        if (deviceButton.length > 0 || device0Array.length > 0) {
                             //alert('do nothing bitch');
                         }
                         
                         else
                         {
-                            basement = document.createElement('div');
-                            basement.classList.add('floorButtons');
-                            deviceButton.push(basement);
-                            //deviceButton[0].style.transform = "rotate(0deg) translateX(0px)";
-                            
-                            floor1 = document.createElement('div');
-                            floor1.classList.add('floorButtons');
-                            deviceButton.push(floor1);
-                            
-                            floor2 = document.createElement('div');
-                            floor2.classList.add('floorButtons');
-                            deviceButton.push(floor2);
-                            
-                            floor3 = document.createElement('div');
-                            floor3.classList.add('floorButtons');
-                            deviceButton.push(floor3);
-                            
-                            floor4 = document.createElement('div');
-                            floor4.classList.add('floorButtons');
-                            deviceButton.push(floor4);
-                            
-                            attic = document.createElement('div');
-                            attic.classList.add('floorButtons');
-                            deviceButton.push(attic);
-                            
-                            holder.appendChild(basement);
-                    
-                            holder.appendChild(floor1);
-                        
-                            holder.appendChild(floor2);
-                        
-                            holder.appendChild(floor3);
-                        
-                            holder.appendChild(floor4);
-                        
-                            holder.appendChild(attic);
+                            createFloorButtons();
                             
                             for(x=0; x < deviceButton.length;)
                             {
@@ -517,47 +483,13 @@
                     
                     if (deviceClicked == 'device2' || deviceClicked == 'empty') {
                         
-                        if (deviceButton.length > 0) {
+                        if (deviceButton.length > 0 || device0Array.length > 0) {
                             //alert('do nothing bitch');
                         }
                         
                         else
                         {
-                            basement = document.createElement('div');
-                            basement.classList.add('floorButtons');
-                            deviceButton.push(basement);
-                            
-                            floor1 = document.createElement('div');
-                            floor1.classList.add('floorButtons');
-                            deviceButton.push(floor1);
-                            
-                            floor2 = document.createElement('div');
-                            floor2.classList.add('floorButtons');
-                            deviceButton.push(floor2);
-                            
-                            floor3 = document.createElement('div');
-                            floor3.classList.add('floorButtons');
-                            deviceButton.push(floor3);
-                            
-                            floor4 = document.createElement('div');
-                            floor4.classList.add('floorButtons');
-                            deviceButton.push(floor4);
-                            
-                            attic = document.createElement('div');
-                            attic.classList.add('floorButtons');
-                            deviceButton.push(attic);
-                            
-                            holder.appendChild(basement);
-                    
-                            holder.appendChild(floor1);
-                        
-                            holder.appendChild(floor2);
-                        
-                            holder.appendChild(floor3);
-                        
-                            holder.appendChild(floor4);
-                        
-                            holder.appendChild(attic);
+                            createFloorButtons();
                             
                             for(x=0; x < deviceButton.length;)
                             {
@@ -582,6 +514,7 @@
                 if (clicked == device3) {
                     
                     if (deviceClicked == 'device0' || 'device1' || 'device2') {
+                        
                         for(x=0; x < deviceButton.length;)
                         {
                             
@@ -598,53 +531,19 @@
                         //alert('yo');
                         deviceClicked = 'device3';
                     
-                        moveAroundBy = -180;
+                        moveAroundBy = 180;
                         rotateAndPosition();
                     }
                     
                     if(deviceClicked == 'device3' || deviceClicked == 'empty')
-                    { 
-                        if (deviceButton.length > 0) {
+                    {
+                        if (deviceButton.length > 0 || device0Array.length > 0) {
                             //alert('do nothing bitch');
                         }
                         
                         else
                         {
-                            basement = document.createElement('div');
-                            basement.classList.add('floorButtons');
-                            deviceButton.push(basement);
-                            
-                            floor1 = document.createElement('div');
-                            floor1.classList.add('floorButtons');
-                            deviceButton.push(floor1);
-                            
-                            floor2 = document.createElement('div');
-                            floor2.classList.add('floorButtons');
-                            deviceButton.push(floor2);
-                            
-                            floor3 = document.createElement('div');
-                            floor3.classList.add('floorButtons');
-                            deviceButton.push(floor3);
-                            
-                            floor4 = document.createElement('div');
-                            floor4.classList.add('floorButtons');
-                            deviceButton.push(floor4);
-                            
-                            attic = document.createElement('div');
-                            attic.classList.add('floorButtons');
-                            deviceButton.push(attic);
-                            
-                            holder.appendChild(basement);
-                    
-                            holder.appendChild(floor1);
-                        
-                            holder.appendChild(floor2);
-                        
-                            holder.appendChild(floor3);
-                        
-                            holder.appendChild(floor4);
-                        
-                            holder.appendChild(attic);
+                            createFloorButtons();
                             
                             for(x=0; x < deviceButton.length;)
                             {
@@ -658,7 +557,7 @@
                                 
                             }
                             deviceClicked = 'device3';
-                            moveAroundBy = -180;
+                            moveAroundBy = 180;
                             rotateAndPosition();
                         }
                     }
@@ -666,9 +565,10 @@
                 
                 if (clicked == device0) {
                     
-                    console.log(deviceClicked);
+                    //console.log(deviceClicked);
                     
                     if (deviceClicked == 'device1' || 'device2' || 'device3') {
+                        
                         for(x=0; x < deviceButton.length;)
                         {
                             
@@ -692,47 +592,13 @@
                     if(deviceClicked == 'device0' || deviceClicked == 'empty')
                     {
                         
-                        if (deviceButton.length > 0) {
-                            //alert('do nothing bitch');
+                        if (deviceButton.length > 0 || device0Array.length > 0) {
                         }
                         
                         else
-                        {  
-                            basement = document.createElement('div');
-                            basement.classList.add('floorButtons');
-                            deviceButton.push(basement);
+                        {
                             
-                            floor1 = document.createElement('div');
-                            floor1.classList.add('floorButtons');
-                            deviceButton.push(floor1);
-                            
-                            floor2 = document.createElement('div');
-                            floor2.classList.add('floorButtons');
-                            deviceButton.push(floor2);
-                            
-                            floor3 = document.createElement('div');
-                            floor3.classList.add('floorButtons');
-                            deviceButton.push(floor3);
-                            
-                            floor4 = document.createElement('div');
-                            floor4.classList.add('floorButtons');
-                            deviceButton.push(floor4);
-                            
-                            attic = document.createElement('div');
-                            attic.classList.add('floorButtons');
-                            deviceButton.push(attic);
-                            
-                            holder.appendChild(basement);
-                    
-                            holder.appendChild(floor1);
-                        
-                            holder.appendChild(floor2);
-                        
-                            holder.appendChild(floor3);
-                        
-                            holder.appendChild(floor4);
-                        
-                            holder.appendChild(attic);
+                            createFloorButtons();
                             
                             for(x=0; x < deviceButton.length;)
                             {
@@ -746,12 +612,114 @@
                                 
                             }
                             deviceClicked = 'device0';
-                            moveAroundBy = -180;
+                            moveAroundBy = 180;
                             rotateAndPosition();
                             
                         }
                     }
                     
+                }
+                
+                
+                function createFloorButtons()
+                {
+                            basement = document.createElement('div');
+                            basement.classList.add('floorButtons');
+                            deviceButton.push(basement);
+                            text = document.createElement('p');
+                            basement.onclick = function(){clickFloorAssign(basement)};
+                            basement.dataset.clickCount = 1;
+                            
+                            floor1 = document.createElement('div');
+                            floor1.classList.add('floorButtons');
+                            deviceButton.push(floor1);
+                            text1 = document.createElement('p');
+                            floor1.onclick = function(){clickFloorAssign(floor1)};
+                            floor1.dataset.clickCount = 1;
+                            
+                            floor2 = document.createElement('div');
+                            floor2.classList.add('floorButtons');
+                            deviceButton.push(floor2);
+                            text2 = document.createElement('p');
+                            floor2.onclick = function(){clickFloorAssign(floor2)};
+                            floor2.dataset.clickCount = 1;
+                            
+                            floor3 = document.createElement('div');
+                            floor3.classList.add('floorButtons');
+                            deviceButton.push(floor3);
+                            text3 = document.createElement('p');
+                            floor3.onclick = function(){clickFloorAssign(floor3)};
+                            floor3.dataset.clickCount = 1;
+                            
+                            floor4 = document.createElement('div');
+                            floor4.classList.add('floorButtons');
+                            deviceButton.push(floor4);
+                            text4 = document.createElement('p');
+                            floor4.onclick = function(){clickFloorAssign(floor4)};
+                            floor4.dataset.clickCount = 1;
+                            
+                            attic = document.createElement('div');
+                            attic.classList.add('floorButtons');
+                            deviceButton.push(attic);
+                            text5 = document.createElement('p');
+                            attic.onclick = function(){clickFloorAssign(attic)};
+                            attic.dataset.clickCount = 1;
+                            
+                            holder.appendChild(basement);
+                            basement.appendChild(text);
+                            text.innerHTML = 'B';
+                            text.style.position = 'absolute';
+                            text.style.left = '18px';
+                            text.style.top = '-13px';
+                            text.style.fontWeight = '700';
+                            text.style.fontFamily = 'museo-sans';
+                    
+                            holder.appendChild(floor1);
+                            floor1.appendChild(text1);
+                            text1.innerHTML = '1';
+                            text1.style.position = 'absolute';
+                            text1.style.left = '18px';
+                            text1.style.top = '-13px';
+                            text1.style.fontWeight = '700';
+                            text1.style.fontFamily = 'museo-sans';
+                        
+                            holder.appendChild(floor2);
+                            floor2.appendChild(text2);
+                            text2.innerHTML = '2';
+                            text2.style.position = 'absolute';
+                            text2.style.left = '18px';
+                            text2.style.top = '-13px';
+                            text2.style.fontWeight = '700';
+                            text2.style.fontFamily = 'museo-sans';
+                        
+                            holder.appendChild(floor3);
+                            floor3.appendChild(text3);
+                            text3.innerHTML = '3';
+                            text3.style.position = 'absolute';
+                            text3.style.left = '18px';
+                            text3.style.top = '-13px';
+                            text3.style.fontWeight = '700';
+                            text3.style.fontFamily = 'museo-sans';
+                        
+                            holder.appendChild(floor4);
+                            floor4.appendChild(text4);
+                            text4.innerHTML = '4';
+                            text4.style.position = 'absolute';
+                            text4.style.left = '18px';
+                            text4.style.top = '-13px';
+                            text4.style.fontWeight = '700';
+                            text4.style.fontFamily = 'museo-sans';
+                        
+                            holder.appendChild(attic);
+                            attic.appendChild(text5);
+                            text5.innerHTML = 'A';
+                            text5.style.position = 'absolute';
+                            text5.style.left = '18px';
+                            text5.style.top = '-13px';
+                            text5.style.fontWeight = '700';
+                            text5.style.fontFamily = 'museo-sans';
+                    
+                            checkForClick();
                 }
                 
         }
@@ -767,11 +735,10 @@
                             
                             deviceButton[i].classList.add('fade');
                             
-                            console.log(deviceClicked);
+                            //console.log(deviceClicked);
                             
                             if (deviceClicked == 'device0') {
                                 deviceButton[i].style.transform = "rotate("+moveAroundBy+deg+") translateX(80px) rotate("+moveAroundByNeg+deg+")";
-                                console.log(moveAroundBy+deg);
 
                                 i++;
                                 moveAroundBy -= (180/(deviceButton.length - 1));
@@ -785,6 +752,7 @@
                                 moveAroundByNeg = -1*(moveAroundBy);
                             }
                             if (deviceClicked == 'device2') {
+                                
                                 deviceButton[i].style.transform = "rotate("+moveAroundBy+deg+") translateY(80px) rotate("+moveAroundByNeg+deg+")";
                                 
                                 i++;
@@ -800,8 +768,773 @@
                             }
                     }
                 }
+    
+    
+                function checkForIf(which)
+                {
+                    if(deviceClicked == 'device0' && device0Array.length == 1 && which.dataset.clickCount == 2)
+                    {
+                        
+                    }
+                }
         
-        //Click events
+        //-------------------- ///////// CLICK EVENTS ///////////-------------------------//
+        /*var device0Array = [];
+        var device1Array = [];
+        var device2Array = [];
+        var device3Array = [];*/
+    
+        var device0Assign;
+        var device1Assign;
+        var device2Assign;
+        var device3Assign;
+		
+		var whichFloor;
+        var blah;
+        var blahblah;
+        
+    
+    function checkForClick()
+    {
+		setInterval(function()
+		{	
+			var a = basement.dataset.clickCount;
+			if(a > 0 )
+            {
+            	setTimeout(function() {
+					console.log(a, basement.dataset.clickCount);
+                    a=0;
+                	basement.dataset.clickCount = 0;
+                }, 5000);
+            }
+			
+			
+			
+		}, 100);
+    }
+        
+        function basementClick(floor)
+        {
+            if(floor == device0)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                    deviceButton[x].style.top = '-47px';
+                    deviceButton[x].style.left = '84px';
+                                
+                    x++;
+                                
+                }
+                
+                var a;
+                a = basement.dataset.clickCount;
+                a++;
+                basement.dataset.clickCount = a;
+                
+                //checkForIf(basement);
+				whichFloor = floor;
+
+                deviceClicked = 'device0';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device1)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                                
+                    deviceButton[x].style.top = '85px';
+                    deviceButton[x].style.left = '216px';
+                                
+                    x++;
+                                
+                }
+                
+                var a;
+                a = basement.dataset.clickCount;
+                a++;
+                basement.dataset.clickCount = a;
+
+                if(basement.dataset.clickCount <= 2)
+                {
+
+                }
+
+                            
+                deviceClicked = 'device1';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device2)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                                
+                    deviceButton[x].style.top = '215px';
+                    deviceButton[x].style.left = '84px';
+                                
+                    x++;
+                                
+                }
+                deviceClicked = 'device2';
+                moveAroundBy = 90;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device3)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                            
+                    deviceButton[x].style.top = '85px';
+                    deviceButton[x].style.left = '-50px';
+                            
+                    x++;
+                            
+                }
+                        
+                deviceClicked = 'device3';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+        }
+    
+        function floor1Click(floor)
+        {
+            
+            if(floor == device0)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                    deviceButton[x].style.top = '-47px';
+                    deviceButton[x].style.left = '84px';
+                                
+                    x++;
+                                
+                }
+                
+                deviceClicked = 'device0';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device1)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                                
+                    deviceButton[x].style.top = '85px';
+                    deviceButton[x].style.left = '216px';
+                                
+                    x++;
+                                
+                }
+                            
+                deviceClicked = 'device1';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device2)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                                
+                    deviceButton[x].style.top = '215px';
+                    deviceButton[x].style.left = '84px';
+                                
+                    x++;
+                                
+                }
+                deviceClicked = 'device2';
+                moveAroundBy = 90;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device3)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                            
+                    deviceButton[x].style.top = '85px';
+                    deviceButton[x].style.left = '-50px';
+                            
+                    x++;
+                            
+                }
+                        
+                deviceClicked = 'device3';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+        }
+    
+        function floor2Click(floor)
+        {
+            
+            if(floor == device0)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                    deviceButton[x].style.top = '-47px';
+                    deviceButton[x].style.left = '84px';
+                                
+                    x++;
+                                
+                }
+                
+                deviceClicked = 'device0';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device1)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                                
+                    deviceButton[x].style.top = '85px';
+                    deviceButton[x].style.left = '216px';
+                                
+                    x++;
+                                
+                }
+                            
+                deviceClicked = 'device1';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device2)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                                
+                    deviceButton[x].style.top = '215px';
+                    deviceButton[x].style.left = '84px';
+                                
+                    x++;
+                                
+                }
+                deviceClicked = 'device2';
+                moveAroundBy = 90;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device3)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                            
+                    deviceButton[x].style.top = '85px';
+                    deviceButton[x].style.left = '-50px';
+                            
+                    x++;
+                            
+                }
+                        
+                deviceClicked = 'device3';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+        }
+    
+        function floor3Click(floor)
+        {
+            
+            if(floor == device0)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                    deviceButton[x].style.top = '-47px';
+                    deviceButton[x].style.left = '84px';
+                                
+                    x++;
+                                
+                }
+                
+                deviceClicked = 'device0';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device1)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                                
+                    deviceButton[x].style.top = '85px';
+                    deviceButton[x].style.left = '216px';
+                                
+                    x++;
+                                
+                }
+                            
+                deviceClicked = 'device1';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device2)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                                
+                    deviceButton[x].style.top = '215px';
+                    deviceButton[x].style.left = '84px';
+                                
+                    x++;
+                                
+                }
+                deviceClicked = 'device2';
+                moveAroundBy = 90;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device3)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                            
+                    deviceButton[x].style.top = '85px';
+                    deviceButton[x].style.left = '-50px';
+                            
+                    x++;
+                            
+                }
+                        
+                deviceClicked = 'device3';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+        }
+    
+        function floor4Click(floor)
+        {
+            
+            if(floor == device0)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                    deviceButton[x].style.top = '-47px';
+                    deviceButton[x].style.left = '84px';
+                                
+                    x++;
+                                
+                }
+                
+                deviceClicked = 'device0';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device1)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                                
+                    deviceButton[x].style.top = '85px';
+                    deviceButton[x].style.left = '216px';
+                                
+                    x++;
+                                
+                }
+                            
+                deviceClicked = 'device1';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device2)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                                
+                    deviceButton[x].style.top = '215px';
+                    deviceButton[x].style.left = '84px';
+                                
+                    x++;
+                                
+                }
+                deviceClicked = 'device2';
+                moveAroundBy = 90;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device3)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                            
+                    deviceButton[x].style.top = '85px';
+                    deviceButton[x].style.left = '-50px';
+                            
+                    x++;
+                            
+                }
+                        
+                deviceClicked = 'device3';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+        }
+    
+        function atticClick(floor)
+        {
+            
+            if(floor == device0)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                    deviceButton[x].style.top = '-47px';
+                    deviceButton[x].style.left = '84px';
+                                
+                    x++;
+                                
+                }
+                
+                deviceClicked = 'device0';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device1)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                                
+                    deviceButton[x].style.top = '85px';
+                    deviceButton[x].style.left = '216px';
+                                
+                    x++;
+                                
+                }
+                            
+                deviceClicked = 'device1';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device2)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                                
+                    deviceButton[x].style.top = '215px';
+                    deviceButton[x].style.left = '84px';
+                                
+                    x++;
+                                
+                }
+                deviceClicked = 'device2';
+                moveAroundBy = 90;
+                rotateAndPosition();
+                
+            }
+            
+            if(floor == device3)
+            {
+                
+                for(x=0; x < deviceButton.length;)
+                {
+                            
+                    deviceButton[x].style.top = '85px';
+                    deviceButton[x].style.left = '-50px';
+                            
+                    x++;
+                            
+                }
+                        
+                deviceClicked = 'device3';
+                moveAroundBy = 180;
+                rotateAndPosition();
+                
+            }
+            
+        }
+    
+        function clickFloorAssign(which) {
+            
+            //console.log(deviceClicked);
+            //console.log(device0.onclick);
+            if (deviceClicked == 'device0') {
+                if(device0Array.length > 0)
+                {
+                    //alert('dont do shit');
+                }
+                
+                else
+                {
+                    
+                    //device0Assign = which;
+                    
+                    if(which == basement)
+                    {
+                        which.onclick = function(){basementClick(device0)};
+                    }
+
+                    if(which == floor1)
+                    {
+                        which.onclick = function(){floor1Click(device0)};
+                    }
+
+                    if(which == floor2)
+                    {
+                        which.onclick = function(){floor2Click(device0)};
+                    }
+
+                    if(which == floor3)
+                    {
+                        which.onclick = function(){floor3Click(device0)};
+                    }
+
+                    if(which == floor4)
+                    {
+                        which.onclick = function(){floor4Click(device0)};
+                    }
+
+                    if(which == attic)
+                    {
+                        which.onclick = function(){atticClick(device0)};
+                    }
+                    
+                    which.style.top = '-48px'; 
+                    which.style.left = '85px';
+                    
+                    //alert('yo');
+                    
+                    which.style.transform = "rotate(0deg) translateX(0px)";
+                    a = deviceButton.indexOf(which);
+
+                    device0Array.push(deviceButton.splice(a, 1));
+                    //console.log(deviceButton);
+
+                    //which.onclick = dontdoshit;
+                    moveAroundBy = 180;
+                    rotateAndPosition();
+                }
+            }
+            
+            if (deviceClicked == 'device1') {
+                if(device1Array.length > 0)
+                {
+                    
+                }
+                
+                else
+                {
+                    //which.onclick = basementClick;
+                    
+                    if(which == basement)
+                    {
+                        which.onclick = function(){basementClick(device1)};
+                    }
+
+                    if(which == floor1)
+                    {
+                        which.onclick = function(){floor1Click(device1)};
+                    }
+
+                    if(which == floor2)
+                    {
+                        which.onclick = function(){floor2Click(device1)};
+                    }
+
+                    if(which == floor3)
+                    {
+                        which.onclick = function(){floor3Click(device1)};
+                    }
+
+                    if(which == floor4)
+                    {
+                        which.onclick = function(){floor4Click(device1)};
+                    }
+
+                    if(which == attic)
+                    {
+                        which.onclick = function(){atticClick(device1)};
+                    }
+                    
+                    which.style.top = '85px'; 
+                    which.style.left = '216px';
+                    
+                    //alert('yo');
+                    
+                    which.style.transform = "rotate(0deg) translateX(0px)";
+                    a = deviceButton.indexOf(which);
+
+                    device1Array.push(deviceButton.splice(a, 1));
+                    //console.log(deviceAdded);
+                    //console.log(deviceButton);
+
+                    moveAroundBy = 180;
+                    rotateAndPosition();
+                }
+            }
+            
+            if (deviceClicked == 'device2') {
+                if(device2Array.length > 0)
+                {
+                    
+                }
+                
+                else
+                {
+                    //which.onclick = function() {dontdoshit(this)};
+                    
+                    if(which == basement)
+                    {
+                        which.onclick = function(){basementClick(device2)};
+                    }
+
+                    if(which == floor1)
+                    {
+                        which.onclick = function(){floor1Click(device2)};
+                    }
+
+                    if(which == floor2)
+                    {
+                        which.onclick = function(){floor2Click(device2)};
+                    }
+
+                    if(which == floor3)
+                    {
+                        which.onclick = function(){floor3Click(device2)};
+                    }
+
+                    if(which == floor4)
+                    {
+                        which.onclick = function(){floor4Click(device2)};
+                    }
+
+                    if(which == attic)
+                    {
+                        which.onclick = function(){atticClick(device2)};
+                    }
+                    
+                    which.style.top = '215px'; 
+                    which.style.left = '84px';
+                    
+                    //alert('yo');
+                    
+                    which.style.transform = "rotate(0deg) translateX(0px)";
+                    a = deviceButton.indexOf(which);
+
+                    device2Array.push(deviceButton.splice(a, 1));
+
+                    moveAroundBy = 90;
+                    rotateAndPosition();
+                }
+            }
+            
+            if (deviceClicked == 'device3') 
+            {
+                if(device3Array.length > 0)
+                {
+                    
+                }
+                
+                else
+                {
+                    //which.onclick = function() {dontdoshit('device3');
+                    
+                    if(which == basement)
+                    {
+                        which.onclick = function(){basementClick(device3)};
+                    }
+
+                    if(which == floor1)
+                    {
+                        which.onclick = function(){floor1Click(device3)};
+                    }
+
+                    if(which == floor2)
+                    {
+                        which.onclick = function(){floor2Click(device3)};
+                    }
+
+                    if(which == floor3)
+                    {
+                        which.onclick = function(){floor3Click(device3)};
+                    }
+
+                    if(which == floor4)
+                    {
+                        which.onclick = function(){floor4Click(device3)};
+                    }
+
+                    if(which == attic)
+                    {
+                        which.onclick = function(){atticClick(device3)};
+                    }
+                    
+                    which.style.top = '85px'; 
+                    which.style.left = '-50px';
+                    
+                    //alert('yo');
+                    
+                    which.style.transform = "rotate(0deg) translateX(0px)";
+                    a = deviceButton.indexOf(which);
+
+                    device3Array.push(deviceButton.splice(a, 1));
+
+                    moveAroundBy = 180;
+                    rotateAndPosition();
+                }
+            }
+        }
         
         function detectButtonClick()
         {
@@ -885,7 +1618,6 @@
                 openDevicesOptions(device3);
             },500);
         }
-        
     </script>
 
 </html>
