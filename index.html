@@ -768,15 +768,6 @@
                             }
                     }
                 }
-    
-    
-                function checkForIf(which)
-                {
-                    if(deviceClicked == 'device0' && device0Array.length == 1 && which.dataset.clickCount == 2)
-                    {
-                        
-                    }
-                }
         
         //-------------------- ///////// CLICK EVENTS ///////////-------------------------//
         /*var device0Array = [];
@@ -789,29 +780,63 @@
         var device2Assign;
         var device3Assign;
 		
-		var whichFloor;
-        var blah;
-        var blahblah;
+	var whichFloor;
         
     
     function checkForClick()
     {
+        
+        var z=0;
 		setInterval(function()
 		{	
-			var a = basement.dataset.clickCount;
-			if(a > 0 )
-            {
-            	setTimeout(function() {
-					console.log(a, basement.dataset.clickCount);
-                    a=0;
-                	basement.dataset.clickCount = 0;
-                }, 5000);
-            }
-			
-			
-			
+		    var a = basement.dataset.clickCount;
+                    var b = floor1.dataset.clickCount;
+                    var c = floor2.dataset.clickCount;
+                    var d = floor3.dataset.clickCount;
+                    var e = floor4.dataset.clickCount;
+                    var f = attic.dataset.clickCount;
+		    if(a > 0 || b>0 || c>0 || d>0 || e>0 || f>0)
+                    {
+                        setTimeout(function() {
+                        a=0;
+                        basement.dataset.clickCount = 0;
+                        b=0;
+                        floor1.dataset.clickCount = 0;
+                        c=0;
+                        floor2.dataset.clickCount = 0;
+                        d=0;
+                        floor3.dataset.clickCount = 0;
+                        e=0;
+                        floor4.dataset.clickCount = 0;
+                        f=0;
+                        attic.dataset.clickCount = 0;
+                        }, 5000);
+                    }
+                    
+                    if (device0Array.length == 1 && device1Array.length == 1 && device2Array.length == 1 && device3Array.length == 1) {
+                        for(i=0; i < deviceButton.length;)
+                        {
+                            deviceButton[i].remove();
+                            i++;
+                        }
+                        
+                        if (z <= 0) {
+                            z++;
+                            console.log(z);
+                            adjustDevices();
+                        }
+                    }
+                    
 		}, 100);
+                
     }
+    
+        function adjustDevices()
+        {
+            console.log(device0Array);
+            console.log(device0Array[0]);
+            device0Array[0].style.height ='50px';
+        }
         
         function basementClick(floor)
         {
@@ -833,11 +858,12 @@
                 basement.dataset.clickCount = a;
                 
                 //checkForIf(basement);
-				whichFloor = floor;
+		whichFloor = floor;
 
                 deviceClicked = 'device0';
                 moveAroundBy = 180;
                 rotateAndPosition();
+                console.log(device0);
                 
             }
             
@@ -859,11 +885,6 @@
                 a++;
                 basement.dataset.clickCount = a;
 
-                if(basement.dataset.clickCount <= 2)
-                {
-
-                }
-
                             
                 deviceClicked = 'device1';
                 moveAroundBy = 180;
@@ -883,6 +904,12 @@
                     x++;
                                 
                 }
+                var a;
+                a = basement.dataset.clickCount;
+                a++;
+                basement.dataset.clickCount = a;
+
+                            
                 deviceClicked = 'device2';
                 moveAroundBy = 90;
                 rotateAndPosition();
@@ -902,6 +929,12 @@
                             
                 }
                         
+                var a;
+                a = basement.dataset.clickCount;
+                a++;
+                basement.dataset.clickCount = a;
+
+                            
                 deviceClicked = 'device3';
                 moveAroundBy = 180;
                 rotateAndPosition();
@@ -925,6 +958,11 @@
                                 
                 }
                 
+                var a;
+                a = floor1.dataset.clickCount;
+                a++;
+                floor1.dataset.clickCount = a;
+                
                 deviceClicked = 'device0';
                 moveAroundBy = 180;
                 rotateAndPosition();
@@ -943,6 +981,10 @@
                     x++;
                                 
                 }
+                var a;
+                a = floor1.dataset.clickCount;
+                a++;
+                floor1.dataset.clickCount = a;
                             
                 deviceClicked = 'device1';
                 moveAroundBy = 180;
@@ -962,6 +1004,11 @@
                     x++;
                                 
                 }
+                var a;
+                a = floor1.dataset.clickCount;
+                a++;
+                floor1.dataset.clickCount = a;
+                
                 deviceClicked = 'device2';
                 moveAroundBy = 90;
                 rotateAndPosition();
@@ -980,6 +1027,10 @@
                     x++;
                             
                 }
+                var a;
+                a = floor1.dataset.clickCount;
+                a++;
+                floor1.dataset.clickCount = a;
                         
                 deviceClicked = 'device3';
                 moveAroundBy = 180;
@@ -1003,6 +1054,10 @@
                     x++;
                                 
                 }
+                var a;
+                a = floor2.dataset.clickCount;
+                a++;
+                floor2.dataset.clickCount = a;
                 
                 deviceClicked = 'device0';
                 moveAroundBy = 180;
@@ -1022,6 +1077,10 @@
                     x++;
                                 
                 }
+                var a;
+                a = floor2.dataset.clickCount;
+                a++;
+                floor2.dataset.clickCount = a;
                             
                 deviceClicked = 'device1';
                 moveAroundBy = 180;
@@ -1041,6 +1100,11 @@
                     x++;
                                 
                 }
+                var a;
+                a = floor2.dataset.clickCount;
+                a++;
+                floor2.dataset.clickCount = a;
+                
                 deviceClicked = 'device2';
                 moveAroundBy = 90;
                 rotateAndPosition();
@@ -1059,6 +1123,10 @@
                     x++;
                             
                 }
+                var a;
+                a = floor2.dataset.clickCount;
+                a++;
+                floor2.dataset.clickCount = a;
                         
                 deviceClicked = 'device3';
                 moveAroundBy = 180;
@@ -1082,6 +1150,10 @@
                     x++;
                                 
                 }
+                var a;
+                a = floor3.dataset.clickCount;
+                a++;
+                floor3.dataset.clickCount = a;
                 
                 deviceClicked = 'device0';
                 moveAroundBy = 180;
@@ -1101,6 +1173,10 @@
                     x++;
                                 
                 }
+                var a;
+                a = floor3.dataset.clickCount;
+                a++;
+                floor3.dataset.clickCount = a;
                             
                 deviceClicked = 'device1';
                 moveAroundBy = 180;
@@ -1120,6 +1196,11 @@
                     x++;
                                 
                 }
+                var a;
+                a = floor3.dataset.clickCount;
+                a++;
+                floor3.dataset.clickCount = a;
+                
                 deviceClicked = 'device2';
                 moveAroundBy = 90;
                 rotateAndPosition();
@@ -1138,6 +1219,10 @@
                     x++;
                             
                 }
+                var a;
+                a = floor3.dataset.clickCount;
+                a++;
+                floor3.dataset.clickCount = a;
                         
                 deviceClicked = 'device3';
                 moveAroundBy = 180;
@@ -1161,6 +1246,10 @@
                     x++;
                                 
                 }
+                var a;
+                a = floor4.dataset.clickCount;
+                a++;
+                floor4.dataset.clickCount = a;
                 
                 deviceClicked = 'device0';
                 moveAroundBy = 180;
@@ -1180,6 +1269,10 @@
                     x++;
                                 
                 }
+                var a;
+                a = floor4.dataset.clickCount;
+                a++;
+                floor4.dataset.clickCount = a;
                             
                 deviceClicked = 'device1';
                 moveAroundBy = 180;
@@ -1199,6 +1292,11 @@
                     x++;
                                 
                 }
+                var a;
+                a = floor4.dataset.clickCount;
+                a++;
+                floor4.dataset.clickCount = a;
+                
                 deviceClicked = 'device2';
                 moveAroundBy = 90;
                 rotateAndPosition();
@@ -1217,6 +1315,10 @@
                     x++;
                             
                 }
+                var a;
+                a = floor4.dataset.clickCount;
+                a++;
+                floor4.dataset.clickCount = a;
                         
                 deviceClicked = 'device3';
                 moveAroundBy = 180;
@@ -1240,6 +1342,10 @@
                     x++;
                                 
                 }
+                var a;
+                a = attic.dataset.clickCount;
+                a++;
+                attic.dataset.clickCount = a;
                 
                 deviceClicked = 'device0';
                 moveAroundBy = 180;
@@ -1259,6 +1365,10 @@
                     x++;
                                 
                 }
+                var a;
+                a = attic.dataset.clickCount;
+                a++;
+                attic.dataset.clickCount = a;
                             
                 deviceClicked = 'device1';
                 moveAroundBy = 180;
@@ -1278,6 +1388,11 @@
                     x++;
                                 
                 }
+                var a;
+                a = attic.dataset.clickCount;
+                a++;
+                attic.dataset.clickCount = a;
+                
                 deviceClicked = 'device2';
                 moveAroundBy = 90;
                 rotateAndPosition();
@@ -1296,6 +1411,10 @@
                     x++;
                             
                 }
+                var a;
+                a = attic.dataset.clickCount;
+                a++;
+                attic.dataset.clickCount = a;
                         
                 deviceClicked = 'device3';
                 moveAroundBy = 180;
@@ -1317,6 +1436,7 @@
                 
                 else
                 {
+                    device0.remove();
                     
                     //device0Assign = which;
                     
@@ -1375,6 +1495,7 @@
                 
                 else
                 {
+                    device1.remove();
                     //which.onclick = basementClick;
                     
                     if(which == basement)
@@ -1432,6 +1553,7 @@
                 
                 else
                 {
+                    device2.remove();
                     //which.onclick = function() {dontdoshit(this)};
                     
                     if(which == basement)
@@ -1488,6 +1610,7 @@
                 
                 else
                 {
+                    device3.remove();
                     //which.onclick = function() {dontdoshit('device3');
                     
                     if(which == basement)
