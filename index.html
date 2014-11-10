@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 
 <html>
@@ -1744,3 +1745,864 @@
     </script>
 
 </html>
+=======
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SmartAIR</title>
+    
+    <link href="css/reset.css">
+    <link href="css/bootstrap.min.css">
+    
+    <script src="js/jquery-1.11.1.min.js"></script>
+    
+    <script src="//use.typekit.net/tjr2acx.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+    
+    <style>
+        
+        html{
+            height: 100%;
+        }
+        
+        body{
+            height: 100%;
+            position: relative;
+        }
+        .container{
+        }
+        
+        .col-md-12{
+            margin:  0 auto;
+            width: 360px;
+            height: 640px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -320px;
+            margin-left: -180px;
+            background-image: url("img/bg.png");
+        }
+        
+        .statusBar{
+            background-image: url("img/status.png");
+            width: 360px;
+            height: 38px;
+        }
+        
+        .title{
+            text-align: center;
+            font-size: 20px;
+            color: white;
+            font-weight: 100;
+            font-family: "museo-sans";
+        }
+        
+        .secondTitle{
+            text-align: center;
+            font-size: 18px;
+            color: white;
+            font-weight: 500;
+            position: absolute;
+            left: 50%;
+            top: 160px;
+            margin-left: -66px;
+            font-family: "museo-sans";
+        }
+        
+        .Holder{
+            background-size: contain;
+            margin: 150px auto 0 auto;
+        }
+        
+        .deviceButtons{
+            background-image: url("img/deviceButton.png");
+            background-size: cover;
+            height: 47px;
+            width: 47px;
+            position: absolute;
+            top: 77px;
+            left: 77px;
+            transition: all 1.0s ease-out;
+        }
+        
+        .floorButtons{
+            background-image: url("img/floorButtonSmall.png");
+            background-size: cover;
+            height: 32px;
+            width: 32px;
+            transform: rotate(0deg) translateX(0px)";
+            position: absolute;
+            transition: all 1.0s ease-out;
+        }
+        
+        .detectAnimation{
+            -webkit-animation: detectClick 0.3s linear;
+        }
+        
+        .loadingAnimation{
+            -webkit-animation: loadingClick 1.8s linear;
+        }
+        
+        .fade{
+            -webkit-animation: fade 1.5s ease;
+        }
+        
+        .deviceButtonAnimate{
+            -webkit-animation: deviceButtonClick 0.3s linear;
+        }
+        
+        
+        /*  --- KeyFrames --- */
+        
+        @-webkit-keyframes detectClick{
+            
+            0% {
+                height: 197px;
+                width: 198px;
+                margin-top: 150px;
+            }
+            
+            65%{
+                height: 185px;
+                width: 186px;
+                margin-top: 160px;
+            }
+            
+            100% {
+                height: 197px;
+                width: 198px;
+                margin-top: 150px;
+            }
+            
+        }
+        
+        @-webkit-keyframes loadingClick{
+            
+            0% {
+                height: 45px;
+                width: 45px;
+                border-radius: 100%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-left: -22px;
+                margin-top: -22px;
+                background-color: #fefefe;
+                opacity: 0.9;
+            }
+            
+            25%{
+                
+                height: 100px;
+                width: 100px;
+                border-radius: 100%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-left: -50px;
+                margin-top: -50px;
+                background-color: #fefefe;
+                opacity: 0.7;
+                
+            }
+            
+            100% {
+                height: 198px;
+                width: 198px;
+                border-radius: 100%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-left: -99px;
+                margin-top: -99px;
+                background-color: #81b0bd;
+                opacity: 0.5;
+            }
+        }
+        
+        @-webkit-keyframes deviceButtonClick{
+            0%{
+                width: 47px;
+                height: 47px;
+                //margin-left: -23px;
+                //margin-top: -23px;
+                //top: 40px;
+            }
+            
+            65%{
+                width: 35px;
+                height: 35px;
+                //margin-left: -17px;
+                //margin-top: -17px;
+                //top: -10px;
+            }
+            
+            100%{
+                width: 47px;
+                height: 47px;
+                //margin-left: -23px;
+                //margin-top: -23px;
+                //top: -55px;
+            }
+        }
+        
+        @-webkit-keyframes fade{
+            0%{
+                opacity: 0;
+            }
+            
+            100%{
+                opacity: 1;
+            }
+        }
+    </style>
+
+</head>
+
+<body style="margin: 0px;">
+        
+        <div class="col-md-12">
+            
+            <div class="statusBar"></div>
+            
+            <div class="content">
+                
+                <p class="title tk-museo-sans">smartAIR</p>
+                
+                <div class="Holder"></div>
+                
+            </div>
+            
+        </div>
+        
+
+</body>
+
+<script>
+        
+        var holder = document.getElementsByClassName("Holder")[0];
+        var title = document.createElement('p');
+        var device0;
+        var device1;
+        var device2;
+        var device3;
+        var deviceButton = [];
+        var deviceClicked = 'empty';
+        
+        var moveAroundBy = 0;
+        
+        window.onload = loadDetect;
+        //var newdetect = detect.cloneNode(true);
+        //alert(detect);
+        
+        //Load each section
+        
+        function loadDetect() {
+            holder.style.backgroundImage="url('img/detect.png')";
+            holder.style.width="198px";
+            holder.style.height="197px";
+            
+            holder.addEventListener("mousedown", detectButtonClick);
+        }
+        
+        function loadingLoad(){
+            document.getElementsByClassName('content')[0].insertBefore(title, holder);
+            title.innerHTML = "Detecting Devices";
+            title.classList.add("secondTitle");
+            title.classList.add("fade");
+            
+            //console.log(title);
+            
+            holder.removeEventListener("mousedown", detectButtonClick);
+            holder.style.backgroundImage='url("img/detectRing.png")';
+            
+            var loader0 = document.createElement('div');
+            holder.appendChild(loader0);
+            
+            var loader1 = document.createElement('div');
+            holder.appendChild(loader1);
+            
+            var loader2 = document.createElement('div');
+            holder.appendChild(loader2);
+            
+            var loader3 = document.createElement('div');
+            holder.appendChild(loader3);
+            
+            holder.style.position='relative';
+            loader0.style.position='absolute';
+            loader1.style.position='absolute';
+            loader2.style.position='absolute';
+            loader3.style.position='absolute';
+            
+            pulse();
+            
+            function pulse() {
+                
+                setTimeout(function(){
+                    
+                        console.log(loader0);
+                        loader0.classList.add("loadingAnimation");
+                }, 200);
+                
+                setTimeout(function(){
+                    
+                        console.log(loader1);
+                        loader1.classList.add("loadingAnimation");
+                }, 700);
+                
+                setTimeout(function(){
+                    
+                        console.log(loader2);
+                        loader2.classList.add("loadingAnimation");
+                }, 1100);
+                
+                setTimeout(function(){
+                    
+                        console.log(loader3);
+                        loader3.classList.add("loadingAnimation");
+                        title.classList.remove('fade');
+                }, 1500);
+                
+            }
+            
+            loadListDevices();
+            
+        }
+        
+        function loadListDevices() {
+            setTimeout(function(){
+                
+                holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
+                holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
+                holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
+                holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
+                console.log(holder);
+                title.innerHTML = "Four Devices Found";
+                
+                title.classList.add('fade');
+                title.style.transition = 'all 2s';
+                title.style.top = '130px';
+                
+                device0.style.visibility = 'visible';
+                device0.classList.add('fade');
+                device0.style.top = '-55px';
+                
+                device1.style.visibility = 'visible';
+                device1.classList.add('fade');
+                device1.style.left = '208px';
+                
+                device2.style.visibility = 'visible';
+                device2.classList.add('fade');
+                device2.style.top = '207px';
+                
+                device3.style.visibility = 'visible';
+                device3.classList.add('fade');
+                device3.style.left = '-57px';
+                
+            }, 3500);
+            title.style.marginLeft = '-73px';
+            
+            device0 = document.createElement('div');
+            holder.appendChild(device0);
+            device0.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">1</p>';
+            device0.classList.add('deviceButtons');
+            device0.style.visibility = 'hidden';
+            
+            device0.onclick = device0OnClick;
+            
+            device1 = document.createElement('div');
+            holder.appendChild(device1);
+            device1.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">2</p>';
+            device1.classList.add('deviceButtons');
+            device1.style.visibility = 'hidden';
+            
+            device1.onclick = device1OnClick;
+                
+            device2 = document.createElement('div');
+            holder.appendChild(device2);
+            device2.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">3</p>';
+            device2.classList.add('deviceButtons');
+            device2.style.visibility = 'hidden';
+            
+            device2.onclick = device2OnClick;
+                
+            device3 = document.createElement('div');
+            holder.appendChild(device3);
+            device3.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">4</p>';
+            device3.classList.add('deviceButtons');
+            device3.style.visibility = 'hidden';
+            
+            device3.onclick = device3OnClick;
+        }
+        
+        function openDevicesOptions(clicked){
+                
+                var basement;
+                
+                var floor1;
+                
+                var floor2;
+                
+                var floor3;
+                
+                var floor4;
+                
+                var attic;
+                
+                if (clicked == device1) {
+                    
+                    if (deviceClicked == 'device0' || 'device2' || 'device3') {
+                        for(x=0; x < deviceButton.length;)
+                        {
+                            
+                            deviceButton[x].style.top = '85px';
+                            deviceButton[x].style.left = '216px';
+                            deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                            //deviceButton[i].style.zIndex = '-1';
+                            
+                            x++;
+                            
+                        }
+                        
+                        
+                        //alert('yo');
+                        deviceClicked = 'device1';
+                    
+                        moveAroundBy = 180;
+                        rotateAndPosition();
+                    }
+                    
+                    if (deviceClicked == 'device1' || deviceClicked == 'empty') {
+                        
+                        if (deviceButton.length > 0) {
+                            //alert('do nothing bitch');
+                        }
+                        
+                        else
+                        {
+                            createFloorButtons();
+                            
+                            for(x=0; x < deviceButton.length;)
+                            {
+                                
+                                deviceButton[x].style.top = '85px';
+                                deviceButton[x].style.left = '216px';
+                                deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                                //deviceButton[i].style.zIndex = '-1';
+                                
+                                x++;
+                                
+                            }
+                            
+                            deviceClicked = 'device1';
+                        
+                            moveAroundBy = 180;
+                            rotateAndPosition();
+                        }
+                    }
+                    
+                }
+                
+                if (clicked == device2) {
+                    
+                    if (deviceClicked == 'device0' || 'device1' || 'device3') {
+                        for(x=0; x < deviceButton.length;)
+                        {
+                            
+                            deviceButton[x].style.top = '215px';
+                            deviceButton[x].style.left = '84px';
+                            deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                            //deviceButton[i].style.zIndex = '-1';
+                            
+                            x++;
+                            
+                        }
+                        
+                        
+                        //alert('yo');
+                        deviceClicked = 'device2';
+                    
+                        moveAroundBy = 90;
+                        rotateAndPosition();
+                    }
+                    
+                    if (deviceClicked == 'device2' || deviceClicked == 'empty') {
+                        
+                        if (deviceButton.length > 0) {
+                            //alert('do nothing bitch');
+                        }
+                        
+                        else
+                        {
+                            createFloorButtons();
+                            
+                            for(x=0; x < deviceButton.length;)
+                            {
+                                
+                                deviceButton[x].style.top = '215px';
+                                deviceButton[x].style.left = '84px';
+                                deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                                //deviceButton[i].style.zIndex = '-1';
+                                
+                                x++;
+                                
+                            }
+                            deviceClicked = 'device2';
+                            moveAroundBy = 90;
+                            rotateAndPosition();
+                        }
+                        
+                    }
+                
+                }
+                
+                if (clicked == device3) {
+                    
+                    if (deviceClicked == 'device0' || 'device1' || 'device2') {
+                        
+                        for(x=0; x < deviceButton.length;)
+                        {
+                            
+                            deviceButton[x].style.top = '85px';
+                            deviceButton[x].style.left = '-50px';
+                            deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                            //deviceButton[i].style.zIndex = '-1';
+                            
+                            x++;
+                            
+                        }
+                        
+                        
+                        //alert('yo');
+                        deviceClicked = 'device3';
+                    
+                        moveAroundBy = -180;
+                        rotateAndPosition();
+                    }
+                    
+                    if(deviceClicked == 'device3' || deviceClicked == 'empty')
+                    {
+                        if (deviceButton.length > 0) {
+                            //alert('do nothing bitch');
+                        }
+                        
+                        else
+                        {
+                            createFloorButtons();
+                            
+                            for(x=0; x < deviceButton.length;)
+                            {
+                                
+                                deviceButton[x].style.top = '85px';
+                                deviceButton[x].style.left = '-50px';
+                                //deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                                //deviceButton[i].style.zIndex = '-1';
+                                
+                                x++;
+                                
+                            }
+                            deviceClicked = 'device3';
+                            moveAroundBy = -180;
+                            rotateAndPosition();
+                        }
+                    }
+                }
+                
+                if (clicked == device0) {
+                    
+                    console.log(deviceClicked);
+                    
+                    if (deviceClicked == 'device1' || 'device2' || 'device3') {
+                        
+                        for(x=0; x < deviceButton.length;)
+                        {
+                            
+                            deviceButton[x].style.top = '-47px';
+                            deviceButton[x].style.left = '84px';
+                            deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                            //deviceButton[i].style.zIndex = '-1';
+                            
+                            x++;
+                            
+                        }
+                        
+                        
+                        //alert('yo');
+                        deviceClicked = 'device0';
+                    
+                        moveAroundBy = 180;
+                        rotateAndPosition();
+                    }
+                    
+                    if(deviceClicked == 'device0' || deviceClicked == 'empty')
+                    {
+                        
+                        if (deviceButton.length > 0) {
+                        }
+                        
+                        else
+                        {  
+                           createFloorButtons();
+                            
+                            for(x=0; x < deviceButton.length;)
+                            {
+                                
+                                deviceButton[x].style.top = '-47px';
+                                deviceButton[x].style.left = '84px';
+                                //deviceButton[x].style.transform = "rotate(0deg) translateX(0px) rotate(0deg)";
+                                //deviceButton[i].style.zIndex = '-1';
+                                
+                                x++;
+                                
+                            }
+                            deviceClicked = 'device0';
+                            moveAroundBy = -180;
+                            rotateAndPosition();
+                            
+                        }
+                    }
+                    
+                }
+                
+                
+                function createFloorButtons()
+                {
+                    basement = document.createElement('div');
+                            basement.classList.add('floorButtons');
+                            deviceButton.push(basement);
+                            text = document.createElement('p');
+                            basement.onclick = function(){clickFloorAssign(basement)};
+                            
+                            floor1 = document.createElement('div');
+                            floor1.classList.add('floorButtons');
+                            deviceButton.push(floor1);
+                            text1 = document.createElement('p');
+                            floor1.onclick = function(){clickFloorAssign(floor1)};
+                            
+                            floor2 = document.createElement('div');
+                            floor2.classList.add('floorButtons');
+                            deviceButton.push(floor2);
+                            text2 = document.createElement('p');
+                            
+                            floor3 = document.createElement('div');
+                            floor3.classList.add('floorButtons');
+                            deviceButton.push(floor3);
+                            text3 = document.createElement('p');
+                            
+                            floor4 = document.createElement('div');
+                            floor4.classList.add('floorButtons');
+                            deviceButton.push(floor4);
+                            text4 = document.createElement('p');
+                            
+                            attic = document.createElement('div');
+                            attic.classList.add('floorButtons');
+                            deviceButton.push(attic);
+                            text5 = document.createElement('p');
+                            
+                            holder.appendChild(basement);
+                            basement.appendChild(text);
+                            text.innerHTML = 'B';
+                            text.style.position = 'absolute';
+                            text.style.left = '18px';
+                            text.style.top = '-13px';
+                            text.style.fontWeight = '700';
+                            text.style.fontFamily = 'museo-sans';
+                    
+                            holder.appendChild(floor1);
+                            floor1.appendChild(text1);
+                            text1.innerHTML = '1';
+                            text1.style.position = 'absolute';
+                            text1.style.left = '18px';
+                            text1.style.top = '-13px';
+                            text1.style.fontWeight = '700';
+                            text1.style.fontFamily = 'museo-sans';
+                        
+                            holder.appendChild(floor2);
+                            floor2.appendChild(text2);
+                            text2.innerHTML = '2';
+                            text2.style.position = 'absolute';
+                            text2.style.left = '18px';
+                            text2.style.top = '-13px';
+                            text2.style.fontWeight = '700';
+                            text2.style.fontFamily = 'museo-sans';
+                        
+                            holder.appendChild(floor3);
+                            floor3.appendChild(text3);
+                            text3.innerHTML = '3';
+                            text3.style.position = 'absolute';
+                            text3.style.left = '18px';
+                            text3.style.top = '-13px';
+                            text3.style.fontWeight = '700';
+                            text3.style.fontFamily = 'museo-sans';
+                        
+                            holder.appendChild(floor4);
+                            floor4.appendChild(text4);
+                            text4.innerHTML = '4';
+                            text4.style.position = 'absolute';
+                            text4.style.left = '18px';
+                            text4.style.top = '-13px';
+                            text4.style.fontWeight = '700';
+                            text4.style.fontFamily = 'museo-sans';
+                        
+                            holder.appendChild(attic);
+                            attic.appendChild(text5);
+                            text5.innerHTML = 'A';
+                            text5.style.position = 'absolute';
+                            text5.style.left = '18px';
+                            text5.style.top = '-13px';
+                            text5.style.fontWeight = '700';
+                            text5.style.fontFamily = 'museo-sans';
+                }
+                
+        }
+                
+                
+                
+                function rotateAndPosition() {
+                    
+                    var moveAroundByNeg = -1*(moveAroundBy);
+                    var deg = 'deg';
+                    
+                    for (i=0; i < deviceButton.length;) {
+                            
+                            deviceButton[i].classList.add('fade');
+                            
+                            console.log(deviceClicked);
+                            
+                            if (deviceClicked == 'device0') {
+                                deviceButton[i].style.transform = "rotate("+moveAroundBy+deg+") translateX(80px) rotate("+moveAroundByNeg+deg+")";
+                                console.log(moveAroundBy+deg);
+
+                                i++;
+                                moveAroundBy -= (180/(deviceButton.length - 1));
+                                moveAroundByNeg = -1*(moveAroundBy);
+                            }
+                            if (deviceClicked == 'device1') {
+                                deviceButton[i].style.transform = "rotate("+moveAroundBy+deg+") translateY(80px) rotate("+moveAroundByNeg+deg+")";
+                                
+                                i++;
+                                moveAroundBy -= (180/(deviceButton.length - 1));
+                                moveAroundByNeg = -1*(moveAroundBy);
+                            }
+                            if (deviceClicked == 'device2') {
+                                deviceButton[i].style.transform = "rotate("+moveAroundBy+deg+") translateY(80px) rotate("+moveAroundByNeg+deg+")";
+                                
+                                i++;
+                                moveAroundBy += (180/(deviceButton.length - 1));
+                                moveAroundByNeg = -1*(moveAroundBy);
+                            }
+                            if (deviceClicked == 'device3') {
+                                deviceButton[i].style.transform = "rotate("+moveAroundBy+deg+") translateY(80px) rotate("+moveAroundByNeg+deg+")";
+                                
+                                i++;
+                                moveAroundBy += (180/(deviceButton.length - 1));
+                                moveAroundByNeg = -1*(moveAroundBy); 
+                            }
+                    }
+                }
+        
+        //Click events
+        
+        function clickFloorAssign(which) {
+            if (deviceClicked == 'device0') {
+                console.log(which);
+                which.style.top = '-47px';
+                which.style.left = '165px';
+                console.log(deviceButton);
+                deviceButton.splice(which,1);
+                console.log(deviceButton.length);
+                
+                moveAroundBy = -180;
+                rotateAndPosition();
+            }
+        }
+        
+        function detectButtonClick()
+        {
+            
+            holder.classList.add("detectAnimation");
+            
+            setTimeout(function pause() {
+                holder.classList.remove("detectAnimation");
+                //holder.classList.add("fadeAnimation");
+                loadingLoad();
+                    
+            },600);
+            
+        }
+        
+        function device0OnClick()
+        {
+            device0.style.width = "30px";
+            device0.style.height = "30px";
+            device0.style.top = "-47px";
+            device0.style.left = '85px';
+            
+            setTimeout(function pause(){
+                device0.style.width = "47px";
+                device0.style.height = "47px";
+                device0.style.top = "-55px";
+                device0.style.left = '77px';
+                //deviceClicked = 'device0';
+                openDevicesOptions(device0);
+            },500);
+        }
+        
+        
+        function device1OnClick()
+        {
+            device1.style.width = "30px";
+            device1.style.height = "30px";
+            device1.style.top = "86px";
+            device1.style.left = '216px';
+            
+            setTimeout(function pause(){
+                device1.style.width = "47px";
+                device1.style.height = "47px";
+                device1.style.top = "77px";
+                device1.style.left = '208px';
+                //deviceClicked = 'device1';
+                openDevicesOptions(device1);
+            },500);
+        }
+        
+        function device2OnClick()
+        {
+            device2.style.width = "30px";
+            device2.style.height = "30px";
+            device2.style.top = "218px";
+            device2.style.left = '84px';
+            
+            setTimeout(function pause(){
+                device2.style.width = "47px";
+                device2.style.height = "47px";
+                device2.style.top = "207px";
+                device2.style.left = '77px';
+                //deviceClicked = 'device2';
+                openDevicesOptions(device2);
+            },500);
+        }
+        
+        function device3OnClick()
+        {
+            device3.style.width = "30px";
+            device3.style.height = "30px";
+            device3.style.top = "86px";
+            device3.style.left = '-50px';
+            
+            setTimeout(function pause(){
+                device3.style.width = "47px";
+                device3.style.height = "47px";
+                device3.style.top = "77px";
+                device3.style.left = '-57px';
+                //deviceClicked = 'device3';
+                openDevicesOptions(device3);
+            },500);
+        }
+        
+    </script>
+
+</html>
+>>>>>>> FETCH_HEAD
