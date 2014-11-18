@@ -8,6 +8,7 @@
     <link href="css/bootstrap.min.css">
     
     <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
     
     <script src="//use.typekit.net/tjr2acx.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
@@ -80,13 +81,80 @@
         }
         
         .floorButtons{
-            background-image: url("img/floorButtonSmall.png");
-            background-size: cover;
+            background-color: #61b77e;
+            border-radius: 50%;
             height: 32px;
             width: 32px;
             transform: rotate(0deg) translateX(0px)";
             position: absolute;
             transition: all 1.0s ease-out;
+            background-image: url(img/floor.png);
+            background-size: 70%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+            /*aqiTitle.innerHTML='<p style=" color:white; font-family:museo-sans; font-size: 18px; position:absolute; top:43%; left:50%; margin-left:-56px; margin-top:-46px;"><span id="lines" style="font-size:80px; font-weight: 100;">0</span>/100</p><p style="margin:0 auto; color:white; font-weight:500; font-size:20px; font-family:museo-sans; position:absolute; top: 105px; left:55px;">Good</p>*/
+        
+        .aqi-title{
+            width: 150px;
+            height: 150px;
+            background-color: #53abae;
+            border-radius: 100%;
+            position: relative;
+            top: 12%;
+            left: 12%;
+            border: 1px solid #1f848b;
+            transform: all 2s;
+            -webkit-transform: all 2s;
+            z-index: 1;
+        }
+        
+        .aqi-style{
+            color:white; 
+            font-family:museo-sans; 
+            font-size: 18px; 
+            position:absolute; 
+            top:43%; left:50%; 
+            margin-left:-56px; 
+            margin-top:-46px;
+        }
+        
+        .aqi{
+            font-size:60px; 
+            font-weight: 100;
+        }
+        
+        .aqi-english{
+            margin:0 auto; 
+            color:white; 
+            font-weight:500; 
+            font-size:20px; 
+            font-family:museo-sans; 
+            position:absolute; 
+            top: 105px; 
+            left:55px;
+        }
+        
+        svg{
+            height: 200px;
+            width: 200px;
+            display: block;
+            position: absolute;
+            top: 130px;
+            left: -19px;
+            overflow: visible;
+            z-index: -5;
+        }
+        
+        .circle{
+            transform-origin:center center; 
+            transform: rotate(90deg);
+            stroke: #5bb278; 
+            stroke-width: 16; 
+            stroke-dasharray: 62 600; 
+            stroke-dashoffset: 62;
+            fill: rgba(255,255,255,0);
+            transition: all 2s;
         }
         
         .detectAnimation{
@@ -224,6 +292,7 @@
                 <p class="title tk-museo-sans">smartAIR</p>
                 
                 <div class="Holder"></div>
+                <svg id="svgcanvas"></svg>
                 
             </div>
             
@@ -253,6 +322,14 @@
         var floor3;
         var floor4;
         var attic;
+    
+        var aqi = '62';
+        var basementaqi = '65';
+        var floor1aqi = '70';
+        var floor2aqi = '75';
+        var floor3aqi = '80';
+        var floor4aqi = '85';
+        var atticaqi = '90';
     
         var deviceClicked = 'empty';
         
@@ -338,11 +415,6 @@
         
         function loadListDevices() {
             setTimeout(function(){
-                
-                holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
-                holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
-                holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
-                holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
                 //console.log(holder);
                 title.innerHTML = "Four Devices Found";
                 
@@ -350,23 +422,39 @@
                 title.style.transition = 'all 2s';
                 title.style.top = '130px';
                 
-                device0.style.visibility = 'visible';
-                device0.classList.add('fade');
-                device0.style.top = '-55px';
+                setTimeout(function(){
+                    device0.style.visibility = 'visible';
+                    device0.classList.add('fade');
+                    device0.style.top = '-55px';
+                }, 200);
                 
-                device1.style.visibility = 'visible';
-                device1.classList.add('fade');
-                device1.style.left = '208px';
+                setTimeout(function(){
+                    device1.style.visibility = 'visible';
+                    device1.classList.add('fade');
+                    device1.style.left = '208px';
+                }, 300);
                 
-                device2.style.visibility = 'visible';
-                device2.classList.add('fade');
-                device2.style.top = '207px';
+                setTimeout(function(){
+                    device2.style.visibility = 'visible';
+                    device2.classList.add('fade');
+                    device2.style.top = '207px';
+                }, 400);
                 
-                device3.style.visibility = 'visible';
-                device3.classList.add('fade');
-                device3.style.left = '-57px';
+                setTimeout(function(){
+                    device3.style.visibility = 'visible';
+                    device3.classList.add('fade');
+                    device3.style.left = '-57px';
+                }, 500);
                 
-            }, 3500);
+            }, 1500);
+            
+            setTimeout(function(){
+                    holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
+                    holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
+                    holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
+                    holder.removeChild(document.getElementsByClassName('loadingAnimation')[0]);
+                }, 3500);
+            
             title.style.marginLeft = '-73px';
             
             device0 = document.createElement('div');
@@ -374,6 +462,7 @@
             device0.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">1</p>';
             device0.classList.add('deviceButtons');
             device0.style.visibility = 'hidden';
+            device0.style.top = '-36px';
             
             device0.onclick = device0OnClick;
             
@@ -382,6 +471,7 @@
             device1.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">2</p>';
             device1.classList.add('deviceButtons');
             device1.style.visibility = 'hidden';
+            device1.style.left = '188px';
             
             device1.onclick = device1OnClick;
                 
@@ -390,6 +480,7 @@
             device2.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">3</p>';
             device2.classList.add('deviceButtons');
             device2.style.visibility = 'hidden';
+            device2.style.top = '184px';
             
             device2.onclick = device2OnClick;
                 
@@ -398,18 +489,187 @@
             device3.innerHTML = '<p style= "color: #ffffff; font-size: 20px; text-align: center; font-weight: 700; font-family: museo-sans; position: absolute; top: 50%; left: 50%; margin-left: -5px; margin-top: -11px;">4</p>';
             device3.classList.add('deviceButtons');
             device3.style.visibility = 'hidden';
+            device3.style.left = '-35px';
             
             device3.onclick = device3OnClick;
         }
         
         function loadMainHub() {
-            var aqiTitle = document.createElement('p');
-            aqiTitle.innerHTML('<span id="aqiNum">30</span>/100');
+            var aqiTitle = document.createElement('div');
+            aqiTitle.classList.add('aqi-title');
+            aqiTitle.classList.add('fade');
+            aqiTitle.innerHTML='<p class="aqi-style"><span id="data" class="aqi">0</span> /500</p><p class="aqi-english">Good</p>';
+            document.getElementById('svgcanvas').style.zIndex='0';
+            
+            var twocircles = '<circle class="circle" cx="200" cy="200" r="84"></circle>';
+            //62 - 590
+            // Create a dummy receptacle
+            var receptacle = document.createElement('div');
+
+            // Wrap the svg string to a svg object (string)
+            var svgfragment = '<svg>' + twocircles + '</svg>';
+
+            // Add all svg to the receptacle
+            receptacle.innerHTML = '' + svgfragment;
+
+            // Splice the childs of the SVG inside the receptacle to the SVG at the body
+            Array.prototype.slice.call(receptacle.childNodes[0].childNodes).forEach(function (el) {                                                     document.getElementById('svgcanvas').appendChild(el)})
             
             holder.appendChild(aqiTitle);
             
+            document.getElementsByClassName('secondTitle')[0].remove();
+            
+            document.getElementsByClassName('title')[0].innerHTML = 'Your Houses Air Quality Index';
+            
+            setTimeout (function(){
+                aqi = '100';
+                document.getElementsByClassName('circle')[0].style.strokeDasharray= aqi+" 600";
+                $('#data').animateNumber({ number: aqi });
+                //holder.appendChild(aqiData);
+            },500);
+            
         }
-        
+    
+        function basementFloorLoad()
+        {
+            //basementaqi = '100';
+            document.getElementsByClassName('circle')[0].style.strokeDasharray= basementaqi+" 600";
+            $('#data').animateNumber({ number: basementaqi });
+            
+            document.getElementsByClassName('title')[0].innerHTML ='First Floor Air Quality Index';
+            
+            var bio = document.createElement('div');
+            bio.classList.add('floorButtons');
+            bio.classList.add('fade');
+            holder.appendChild(bio);
+            
+            bio.style.height ="40px";
+            bio.style.width="40px";
+            bio.style.top="80px";
+            bio.style.left="80px";
+            bio.style.backgroundImage = "url(img/bio.png)";
+            bio.style.backgroundSize = "65%";
+            
+            bio.style.transform = "rotate(-90deg) translate(130px) rotate(90deg)";
+            
+            var no2 = document.createElement('div');
+            no2.classList.add('floorButtons');
+            no2.classList.add('fade');
+            holder.appendChild(no2);
+            
+            no2.style.height ="40px";
+            no2.style.width="40px";
+            no2.style.top="80px";
+            no2.style.left="80px";
+            no2.style.backgroundImage = "url(img/no2.png)";
+            no2.style.backgroundSize = "75%";
+            
+            no2.style.transform = "rotate(-45deg) translate(130px) rotate(45deg)";
+            
+            var so2 = document.createElement('div');
+            so2.classList.add('floorButtons');
+            so2.classList.add('fade');
+            holder.appendChild(so2);
+            
+            so2.style.height ="40px";
+            so2.style.width="40px";
+            so2.style.top="80px";
+            so2.style.left="80px";
+            so2.style.backgroundImage = "url(img/so2.png)";
+            so2.style.backgroundSize = "75%";
+            
+            so2.style.transform = "rotate(0deg) translate(130px) rotate(0deg)";
+            
+            var ozone = document.createElement('div');
+            ozone.classList.add('floorButtons');
+            ozone.classList.add('fade');
+            holder.appendChild(ozone);
+            
+            ozone.style.height ="40px";
+            ozone.style.width="40px";
+            ozone.style.top="80px";
+            ozone.style.left="80px";
+            ozone.style.backgroundImage = "url(img/o3.png)";
+            ozone.style.backgroundSize = "70%";
+            
+            ozone.style.transform = "rotate(45deg) translate(130px) rotate(-45deg)";
+            
+            var radon = document.createElement('div');
+            radon.classList.add('floorButtons');
+            radon.classList.add('fade');
+            holder.appendChild(radon);
+            
+            radon.style.height ="40px";
+            radon.style.width="40px";
+            radon.style.top="80px";
+            radon.style.left="80px";
+            radon.style.backgroundImage = "url(img/radon.png)";
+            radon.style.backgroundSize = "70%";
+            
+            radon.style.transform = "rotate(90deg) translate(130px) rotate(-90deg)";
+            
+            var comb = document.createElement('div');
+            comb.classList.add('floorButtons');
+            comb.classList.add('fade');
+            holder.appendChild(comb);
+            
+            comb.style.height ="40px";
+            comb.style.width="40px";
+            comb.style.top="80px";
+            comb.style.left="80px";
+            comb.style.backgroundImage = "url(img/combustable.png)";
+            comb.style.backgroundSize = "70%";
+            
+            comb.style.transform = "rotate(135deg) translate(130px) rotate(-135deg)";
+            
+            var smoke = document.createElement('div');
+            smoke.classList.add('floorButtons');
+            smoke.classList.add('fade');
+            holder.appendChild(smoke);
+            
+            smoke.style.height ="40px";
+            smoke.style.width="40px";
+            smoke.style.top="80px";
+            smoke.style.left="80px";
+            smoke.style.backgroundImage = "url(img/smoke.png)";
+            smoke.style.backgroundSize = "70%";
+            
+            smoke.style.transform = "rotate(180deg) translate(130px) rotate(-180deg)";
+            
+            var moisture = document.createElement('div');
+            moisture.classList.add('floorButtons');
+            moisture.classList.add('fade');
+            holder.appendChild(moisture);
+            
+            moisture.style.height ="40px";
+            moisture.style.width="40px";
+            moisture.style.top="80px";
+            moisture.style.left="80px";
+            moisture.style.zIndex="8";
+            moisture.style.backgroundImage = "url(img/moisture.png)";
+            moisture.style.backgroundSize = "40%";
+            
+            moisture.style.transform = "rotate(225deg) translate(130px) rotate(-225deg)";
+        }
+    
+        function removeMainScreen(which)
+        {
+            //while (holder.firstChild) holder.removeChild(holder.firstChild);
+            
+            if(which == basement){basementFloorLoad();}
+            if(which == floor1){floor1FloorLoad();}
+            if(which == floor2){floor2FloorLoad();}
+            if(which == floor3){floor3FloorLoad();}
+            if(which == floor4){floor4FloorLoad();}
+            if(which == attic){atticFloorLoad();}
+            
+            document.getElementsByClassName('floorButtons')[3].remove();
+            document.getElementsByClassName('floorButtons')[2].remove();
+            document.getElementsByClassName('floorButtons')[1].remove();
+            document.getElementsByClassName('floorButtons')[0].remove();
+            
+        }
+
         function openDevicesOptions(clicked){
                 
                 if (clicked == device1) {
@@ -830,7 +1090,7 @@
                         
                         if (z <= 0) {
                             z++;
-                            console.log(z);
+                            //console.log(z);
                             adjustDevices();
                         }
                     }
@@ -846,42 +1106,36 @@
             basement.style.height ='40px';
             basement.style.width ='40px';
             basement.style.transform ='translateX(-5px) translateY(0px)';
-            basement.style.backgroundImage ='url("img/floorButtonSmallGreen.png")';
             basement.firstChild.style.left='22px';
             basement.firstChild.style.top='-12px';
             
             floor1.style.height ='40px';
             floor1.style.width ='40px';
             floor1.style.transform ='translateX(-5px) translateY(0px)';
-            floor1.style.backgroundImage ='url("img/floorButtonSmallGreen.png")';
             floor1.firstChild.style.left='22px';
             floor1.firstChild.style.top='-12px';
             
             floor2.style.height ='40px';
             floor2.style.width ='40px';
             floor2.style.transform ='translateX(-5px) translateY(0px)';
-            floor2.style.backgroundImage ='url("img/floorButtonSmallGreen.png")';
             floor2.firstChild.style.left='22px';
             floor2.firstChild.style.top='-12px';
             
             floor3.style.height ='40px';
             floor3.style.width ='40px';
             floor3.style.transform ='translateX(-5px) translateY(0px)';
-            floor3.style.backgroundImage ='url("img/floorButtonSmallGreen.png")';
             floor3.firstChild.style.left='22px';
             floor3.firstChild.style.top='-12px';
             
             floor4.style.height ='40px';
             floor4.style.width ='40px';
             floor4.style.transform ='translateX(-5px) translateY(0px)';
-            floor4.style.backgroundImage ='url("img/floorButtonSmallGreen.png")';
             floor4.firstChild.style.left='22px';
             floor4.firstChild.style.top='-12px';
             
             attic.style.height ='40px';
             attic.style.width ='40px';
             attic.style.transform ='translateX(-5px) translateY(0px)';
-            attic.style.backgroundImage ='url("img/floorButtonSmallGreen.png")';
             attic.firstChild.style.left='22px';
             attic.firstChild.style.top='-12px';
             
@@ -889,7 +1143,7 @@
         }
         
         function basementClick(floor)
-        {
+        {   
             if(floor == device0)
             {
                 
@@ -913,11 +1167,10 @@
                 deviceClicked = 'device0';
                 moveAroundBy = 180;
                 rotateAndPosition();
-                console.log(device0);
                 
             }
             
-            if(floor == device1)
+            else if(floor == device1)
             {
                 
                 for(x=0; x < deviceButton.length;)
@@ -942,7 +1195,7 @@
                 
             }
             
-            if(floor == device2)
+            else if(floor == device2)
             {
                 
                 for(x=0; x < deviceButton.length;)
@@ -966,7 +1219,7 @@
                 
             }
             
-            if(floor == device3)
+            else if(floor == device3)
             {
                 
                 for(x=0; x < deviceButton.length;)
@@ -991,6 +1244,15 @@
                 
             }
             
+            
+            if(device0Array.length == 1 && device1Array.length == 1 && device2Array.length == 1 && device3Array.length == 1)
+            {
+                var b = basement.dataset.clickCount
+                if( b <= 1 )
+                {
+                    removeMainScreen(basement);
+                }
+            }
         }
     
         function floor1Click(floor)
@@ -1086,6 +1348,15 @@
                 moveAroundBy = 180;
                 rotateAndPosition();
                 
+            }
+            
+            if(device0Array.length == 1 && device1Array.length == 1 && device2Array.length == 1 && device3Array.length == 1)
+            {
+                var b = floor1.dataset.clickCount
+                if( b <= 1 )
+                {
+                    removeMainScreen(floor1);
+                }
             }
             
         }
@@ -1184,6 +1455,15 @@
                 
             }
             
+            if(device0Array.length == 1 && device1Array.length == 1 && device2Array.length == 1 && device3Array.length == 1)
+            {
+                var b = floor2.dataset.clickCount
+                if( b <= 1 )
+                {
+                    removeMainScreen(floor2);
+                }
+            }
+            
         }
     
         function floor3Click(floor)
@@ -1278,6 +1558,15 @@
                 moveAroundBy = 180;
                 rotateAndPosition();
                 
+            }
+            
+            if(device0Array.length == 1 && device1Array.length == 1 && device2Array.length == 1 && device3Array.length == 1)
+            {
+                var b = floor3.dataset.clickCount
+                if( b <= 1 )
+                {
+                    removeMainScreen(floor3);
+                }
             }
             
         }
@@ -1376,6 +1665,15 @@
                 
             }
             
+            if(device0Array.length == 1 && device1Array.length == 1 && device2Array.length == 1 && device3Array.length == 1)
+            {
+                var b = floor4.dataset.clickCount
+                if( b <= 1 )
+                {
+                    removeMainScreen(floor4);
+                }
+            }
+            
         }
     
         function atticClick(floor)
@@ -1470,6 +1768,15 @@
                 moveAroundBy = 180;
                 rotateAndPosition();
                 
+            }
+            
+            if(device0Array.length == 1 && device1Array.length == 1 && device2Array.length == 1 && device3Array.length == 1)
+            {
+                var b = attic.dataset.clickCount
+                if( b <= 1 )
+                {
+                    removeMainScreen(attic);
+                }
             }
             
         }
@@ -1737,7 +2044,7 @@
                 device0.style.left = '77px';
                 //deviceClicked = 'device0';
                 openDevicesOptions(device0);
-            },500);
+            },300);
         }
         
         
@@ -1755,7 +2062,7 @@
                 device1.style.left = '208px';
                 //deviceClicked = 'device1';
                 openDevicesOptions(device1);
-            },500);
+            },300);
         }
         
         function device2OnClick()
@@ -1772,7 +2079,7 @@
                 device2.style.left = '77px';
                 //deviceClicked = 'device2';
                 openDevicesOptions(device2);
-            },500);
+            },300);
         }
         
         function device3OnClick()
@@ -1789,7 +2096,7 @@
                 device3.style.left = '-57px';
                 //deviceClicked = 'device3';
                 openDevicesOptions(device3);
-            },500);
+            },300);
         }
     </script>
 

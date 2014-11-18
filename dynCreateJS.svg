@@ -1,0 +1,145 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     version="1.1" baseProfile="full" onload="loadMe('ho', evt)" onmousemove="createAndFade(evt)">
+ <script type="text/javascript">
+ <![CDATA[
+ 	var svgns="http://www.w3.org/2000/svg";
+ 	function loadMe(x,evt){
+ 		//add mouseListeners to second circle
+ 		clicker=document.getElementById('listenerTarget');
+ 		clicker.addEventListener("mousedown",makeCircle,false);
+ 		clicker.addEventListener("mousedown",makeAniShape,false);	
+ 	}
+ 	
+ 	function on_click(evt,which) {
+            //alert(evt.target.getAttributeNS(null,'id'));
+            //alert(evt.target.firstChild.nodeValue);
+            //evt.target.firstChild.nodeValue="new test";
+            //alert(which);
+            var text_elem = document.getElementById("text_elem");
+            var a_elem = document.createElementNS(svgns,"a");
+            var text_node = document.createTextNode("new link");
+
+            a_elem.setAttributeNS(
+                "http://www.w3.org/1999/xlink",
+                "xlink:href",
+                "http://www.rit.edu");
+
+            a_elem.appendChild(text_node);
+            
+            text_elem.appendChild(a_elem);
+
+	}
+ 
+ 	function makeCircle(){
+ 		var shape=document.createElementNS(svgns,'circle');
+ 		shape.setAttributeNS(null,"r",parseInt(Math.random()*40));
+ 		shape.setAttributeNS(null,"cx",parseInt(Math.random()*400));
+ 		shape.setAttributeNS(null,"cy",parseInt(Math.random()*250));
+ 		
+ 		myFill=makeColor()+","+makeColor()+","+makeColor();
+		myStroke=makeColor()+","+makeColor()+","+makeColor();
+ 		shape.setAttributeNS(null,"style","fill:rgb("+myFill+");stroke:rgb("+myStroke+");stroke-width:"+Math.random()*10);
+		shape.setAttributeNS(null,"opacity",Math.random());
+ 		
+ 		document.documentElement.appendChild(shape);
+ 	}
+ 	
+ 	function makeColor(){
+ 		return parseInt(Math.random()*255);
+ 	}
+ 
+ 
+ function makeAniShape(){
+ 	var shape=document.createElementNS(svgns,"rect");
+ 	shape.setAttributeNS(null,"y",40);
+ 	shape.setAttributeNS(null,"fill","orange");
+ 	shape.setAttributeNS(null,"width",40);
+ 	shape.setAttributeNS(null,"height",40);
+ 	shape.setAttributeNS(null, 'opacity', '0.5');
+ 	
+ 	var ani=document.createElementNS(svgns,"animate");
+ 	ani.setAttributeNS(null, "attributeName", "x");
+ 	ani.setAttributeNS(null, "from", "0");
+ 	ani.setAttributeNS(null, "to", "500");
+ 	ani.setAttributeNS(null, "dur", "4s");
+ 	ani.setAttributeNS(null, "repeatCount", "indefinite");
+ 	
+ 	//we have a problem of time...
+ 		//what time is it NOW
+ 		var svgRoot=document.documentElement;
+ 		//alert(svgRoot);
+ 		var time = svgRoot.getCurrentTime();
+ 		//alert(time);
+ 		//ani.setAttributeNS(null,'begin',time+'s');
+ 		
+ 		//OR
+ 		ani.setAttributeNS(null,'begin','indefinite');
+ 		//http://dev.opera.com/articles/view/advanced-svg-animation-techniques/
+ 	
+ 	shape.appendChild(ani);
+ 	
+ 	document.documentElement.appendChild(shape);
+ 	document.getElementsByTagName('animate')[(document.getElementsByTagName('animate').length-1)].beginElement();
+ }
+ 
+  function createAndFade(evt)
+  {
+    var svgns = "http://www.w3.org/2000/svg";
+    var w = 30;
+    var h = 30;
+    var rect = document.createElementNS(svgns, "rect");
+    //rect.width.baseVal.value = w;
+    rect.setAttributeNS(null,'width',w);
+    //rect.height.baseVal.value = h;    
+    rect.setAttributeNS(null,'height',h);
+    //rect.x.baseVal.value = evt.clientX-w/2;    
+    //rect.y.baseVal.value = evt.clientY-h/2;
+    rect.setAttributeNS(null,'x',evt.clientX-w/2);
+    rect.setAttributeNS(null,'y',evt.clientY-h/2);
+    //rect.rx.baseVal.value=10;
+    rect.setAttributeNS(null,'rx',10);
+    
+    var r = Math.random()*100;
+    var g = Math.random()*100;
+    var b = Math.random()*100;
+    
+    rect.setAttributeNS(null, "fill", "rgb(" + r + "%," + g + "%," + b + "%)");
+    //rect.setAttributeNS(null, "fill-opacity", 0);
+    
+    // fade-in effect
+    var a = document.createElementNS(svgns, "animate");
+    a.setAttributeNS(null, "attributeName", "fill-opacity");
+    a.setAttributeNS(null, "dur", "0.6s");
+    a.setAttributeNS(null, "to", "1");
+    a.setAttributeNS(null, "from", "0");
+    a.setAttributeNS(null, "begin", "indefinite");
+    a.setAttributeNS(null, "fill", "freeze");
+    a.setAttributeNS(null, "onend", "this.parentNode.parentNode.removeChild(this.parentNode);");
+    
+    rect.appendChild(a);
+    document.documentElement.appendChild(rect);
+    
+    // trigger the animation
+    a.beginElement();
+  }
+ 	
+ ]]>
+ </script>
+ 
+
+  <circle cx="60px" cy="100px" r="50px" style="fill:white; stroke:blue;
+  stroke-width:4" onclick="makeCircle()"/>
+
+<circle cx="300px" cy="100px" r="50px" style="fill:white; stroke:blue;
+stroke-width:4" id="listenerTarget"/>
+
+<text x="0" y="20px"  onclick="on_click(evt,this)" id="someText">
+	This is a dynamic link:  
+</text>
+<text id="text_elem" x="190" y="20px">
+	 
+</text>
+
+</svg>
